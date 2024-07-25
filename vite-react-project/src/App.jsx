@@ -1,9 +1,19 @@
+import Navbar from "./components/header/Header"
+import Home from "./components/home/Home"
+import Login from "./components/login/Login"
+import Register from "./components/register/Register"
+import { Route, Routes } from "react-router-dom"
+
 function App() {
 
   return (
     <>
-      <h1>This is a heading</h1>
-      <p>This is a paragraph</p>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
     </>
   )
 }
