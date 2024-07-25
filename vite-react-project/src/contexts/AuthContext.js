@@ -13,10 +13,10 @@ export function AuthProvider({ children }) {
               setUser(currentUser);
             });
             return () => unsubscribe();
-          }, [auth]);
+          }, []);
 
         const value = {
-            currentUser
+            user
         }
 
         return (
