@@ -18,15 +18,9 @@ export default function Login() {
         try {
             await login(email, password);
             navigate("/");
-        } catch (error) {
-            if (error.code === "auth/wrong-password" || error.code === "auth/user-not-found" || error.code === "auth/invalid-credential") {
-                setError("Incorrect email or password.");
-            } else if (error.code === "auth/invalid-email") {
-                setError("Invalid email address.");
-            } else {
-                setError("Error logging in.");
-            }
-            console.log(error);
+        } catch (err) {
+            console.log(err.message);
+            setError(err.message);
             setPassword("");
         }
     }
@@ -38,7 +32,7 @@ export default function Login() {
                 <label htmlFor="email">
                     Email:
                     <input
-                        type="email"
+                        type="text"
                         name="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
