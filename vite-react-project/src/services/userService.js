@@ -1,5 +1,5 @@
 import { auth } from "../firebase/firebase.js";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 async function login(email, password) {
     try {
@@ -9,6 +9,15 @@ async function login(email, password) {
     }
 }
 
+async function logout() {
+    try {
+        await signOut(auth);
+    } catch (error) {
+        throw error;
+    }
+}
+
 export {
     login,
+    logout
 }
