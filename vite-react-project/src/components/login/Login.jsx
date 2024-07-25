@@ -2,9 +2,9 @@ export default function Login() {
     return (
         <>
             <form>
-                <label htmlFor="username">
-                    Username:
-                    <input type="text" name="username" />
+                <label htmlFor="email">
+                    Email:
+                    <input type="email" name="email" />
                 </label>
                 <label htmlFor="password">
                     Password:
