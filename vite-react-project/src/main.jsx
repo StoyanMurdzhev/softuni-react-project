@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from "react-router-dom"
 
 import App from './App.jsx'
-import { AuthProvider } from './contexts/AuthContext.js'
+import { AuthProvider } from './contexts/AuthContext.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <AuthProvider>
