@@ -31,6 +31,12 @@ export default function Navbar() {
                 </div>
                 <div className="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white shadow-md lg:bg-transparent lg:dark:bg-transparent lg:shadow-none dark:bg-gray-900 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
 
+                            <Link to="/recipes"
+                                className="block px-3 py-2 text-gray-600 rounded-lg dark:text-gray-200 hover:bg-gray-100 lg:mx-2"
+                            >
+                                Browse recipes
+                            </Link>
+
                     {user ?
 
                         (<>
