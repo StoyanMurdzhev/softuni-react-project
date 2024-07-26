@@ -1,7 +1,11 @@
+import Hero from "../hero/Hero";
+import RecentPosts from "../recent/RecentPosts";
+
 export default function Home() {
     return (
-        <h1 className="text-3xl font-bold underline text-red-500">
-            Hello world!
-        </h1>
+        <>
+        <Hero />
+        <RecentPosts />
+        </>
     );
 }

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Hero() {
     return (
                 <div className="lg:flex">
@@ -16,12 +18,11 @@ export default function Hero() {
                                 >
                                     Browse Recipes
                                 </a>
-                                <a
-                                    href="#"
+                                <Link to="/register"
                                     className="block px-5 py-2 text-sm font-medium tracking-wider text-center text-gray-700 transition-colors duration-300 transform bg-gray-200 rounded-md lg:mx-4 hover:bg-gray-300"
                                 >
-                                    Learn More
-                                </a>
+                                    Sign Up
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -33,7 +34,6 @@ export default function Hero() {
                                     "url(https://firebasestorage.googleapis.com/v0/b/softuni-react-spa-project.appspot.com/o/Kitchen_and_ingredient_digital_drawing_doodle.jpg?alt=media&token=96630ef6-db18-4513-a722-0abda9b57b54)"
                             }}
                         >
-                            {/* <div className="w-full h-full bg-black opacity-25" /> */}
                         </div>
                     </div>
                 </div>
