@@ -18,28 +18,6 @@ export default function Navbar() {
         }
     }
     return (
-        // <nav>
-        //     <ul style={{ display: 'flex', listStyleType: 'none', padding: 0, margin: 0 }}>
-        //         <li style={{ marginRight: '10px' }}>
-        //             <Link to="/">Home</Link>
-        //         </li>
-        //         { user 
-        //         ? 
-        //         (<li style={{textDecoration: "underline"}} onClick={logoutHandler}>
-        //             Logout
-        //         </li>)
-        //         :
-        //         (<>
-        //         <li style={{ marginRight: '10px' }}>
-        //             <Link to="/login">Login</Link>
-        //         </li>
-        //         <li>
-        //             <Link to="/register">Register</Link>
-        //         </li>
-        //         </>)
-        //         }
-        //     </ul>
-        // </nav>
         <nav className="px-6 py-4 shadow">
             <div className="lg:items-center lg:justify-between lg:flex">
                 <div className="flex items-center justify-between">
