@@ -8,6 +8,7 @@ import GuestRoutes from "./utils/GuestRoutes";
 import Footer from "./components/footer/Footer";
 import RecipeDetails from "./components/recipe-details/RecipeDetails";
 import RecipeCreate from "./components/recipe-create/RecipeCreate";
+import RecipeList from "./components/recipe-list/RecipeList";
 
 function App() {
 
@@ -18,8 +19,8 @@ function App() {
             <Routes>
 
                 <Route path="/" element={<Home />} />
+                <Route path="/recipes" element={<RecipeList />}/>
                 <Route path="/recipes/details" element={<RecipeDetails />} />
-                
                 <Route element={<ProtectedRoutes />}>
                     <Route path="/create" element={<RecipeCreate />}/>
                 </Route>
