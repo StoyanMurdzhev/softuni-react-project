@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import GuestRoutes from "./utils/GuestRoutes";
 import Footer from "./components/footer/Footer";
+import RecipeDetails from "./components/recipe-details/RecipeDetails";
 
 function App() {
 
@@ -15,6 +16,8 @@ function App() {
             
             <Routes>
 
+                <Route path="/recipes/details" element={<RecipeDetails />} />
+                
                 <Route element={<ProtectedRoutes />}>
                     <Route path="/" element={<Home />} />
                 </Route>

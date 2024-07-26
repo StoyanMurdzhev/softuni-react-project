@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function RecipeCard() {
     return (
         <div>
@@ -26,12 +28,11 @@ export default function RecipeCard() {
                             Insert something here
                         </p>
                     </div>
-                    <a
-                        href="#"
+                    <Link to="/recipes/details"
                         className="inline-block text-blue-500 underline hover:text-blue-400"
                     >
                         Details
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>
