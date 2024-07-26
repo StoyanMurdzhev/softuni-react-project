@@ -1,17 +1,62 @@
+import React, { useState } from 'react';
+import { useAuth } from '../../hooks/useAuth.js';
+import { useNavigate } from 'react-router-dom';
+import { submitRecipe, validateFormData } from '../../services/recipeService';
+
+
+
 export default function RecipeCreate() {
+    const { user } = useAuth();
+    const [formData, setFormData] = useState({
+        dish: "",
+        description: "",
+        ingredients: "",
+        instructions: "",
+        imageUrl: "",
+        mealType: "",
+        tags: ""
+    });
+    const [errors, setErrors] = useState({});
+    
+    const navigate = useNavigate();
+
+    function changeHandler(e) {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+    async function submitHandler(e) {
+        e.preventDefault();
+
+        const validationErrors = validateFormData(formData);
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            return;
+        }
+
+        if (!user) {
+            alert("You must be logged in to submit a recipe");
+            return;
+        }
+
+        const { success, error } = await submitRecipe(formData, user.uid);
+        
+        if (success) {
+            navigate("/");
+        } else {
+            console.log(error);
+            alert(error);
+        }
+    };
+
     return (
         <section className="bg-white dark:bg-gray-900">
             <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
-                <form className="w-full max-w-md">
-                    {/* logo */}
-                    {/* <div className="flex justify-center mx-auto">
-                        <img
-                            className="w-auto h-7 sm:h-8"
-                            src="https://merakiui.com/images/logo.svg"
-                            alt=""
-                        />
-                    </div> */}
-                    {/* end logo */}
+                <form className="w-full max-w-md" onSubmit={submitHandler}>
+
                     <div className="flex items-center justify-center">
                         <p>Post a recipe:</p>
                     </div>
@@ -22,15 +67,19 @@ export default function RecipeCreate() {
                             className="block w-full p-2 text-gray-700 bg-white border-2 border-black rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-black focus:border-black dark:focus:border-black focus:ring-black focus:outline-none focus:ring focus:ring-opacity-40"
                             id="dish"
                             name="dish"
+                            value={formData.dish}
+                            onChange={changeHandler}
                         />
                     </div>
 
                     <div className="mt-4">
                         <label htmlFor="mealType">What type of meal is it?</label>
                         <select
+                            className="block w-full p-2 text-gray-700 bg-white border-2 border-black rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-black focus:border-black dark:focus:border-black focus:ring-black focus:outline-none focus:ring focus:ring-opacity-40"
                             id="mealType"
                             name="mealType"
-                            className="block w-full p-2 text-gray-700 bg-white border-2 border-black rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-black focus:border-black dark:focus:border-black focus:ring-black focus:outline-none focus:ring focus:ring-opacity-40"
+                            value={formData.mealType}
+                            onChange={changeHandler}
                         >
                             <option value="">Select a meal type</option>
                             <option value="main">Appetizer</option>
@@ -50,6 +99,8 @@ export default function RecipeCreate() {
                             className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             id="description"
                             name="description"
+                            value={formData.description}
+                            onChange={changeHandler}
                         >
                         </textarea>
                     </div>
@@ -61,6 +112,8 @@ export default function RecipeCreate() {
                             id="ingredients"
                             name="ingredients"
                             placeholder="e.g. pizza dough, tomato sauce, mozzarella"
+                            value={formData.ingredients}
+                            onChange={changeHandler}
                         ></textarea>
                     </div>
 
@@ -71,6 +124,8 @@ export default function RecipeCreate() {
                             className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             id="instructions"
                             name="instructions"
+                            value={formData.instructions}
+                            onChange={changeHandler}
                         ></textarea>
                     </div>
 
@@ -82,17 +137,21 @@ export default function RecipeCreate() {
                             id="imageUrl"
                             name="imageUrl"
                             placeholder="e.g. https://imagehost.com/img"
+                            value={formData.imageUrl}
+                            onChange={changeHandler}
                         />
                     </div>
 
                     <div className="mt-2">
-                        <label htmlFor="tags">Add tags to help make finding your recipe easier!</label>
+                        <label htmlFor="tags">Add tags, separated by a comma, to make finding your recipe easier!</label>
                         <input
                             type="text"
                             className="block w-full p-2 text-gray-700 bg-white border-2 border-black rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-black focus:border-black dark:focus:border-black focus:ring-black focus:outline-none focus:ring focus:ring-opacity-40"
                             id="tags"
                             name="tags"
                             placeholder="e.g. pizza, italian cuisine"
+                            value={formData.tags}
+                            onChange={changeHandler}
                         />
                     </div>
 
