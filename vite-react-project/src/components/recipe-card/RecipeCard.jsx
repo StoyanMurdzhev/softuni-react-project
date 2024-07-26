@@ -1,4 +1,4 @@
-export default function Card() {
+export default function RecipeCard() {
     return (
         <div>
             <img
@@ -7,7 +7,7 @@ export default function Card() {
                 alt="Pizza Margherita"
             />
             <div className="mt-8">
-                <span className="text-blue-500 text-xs font-bold uppercase">Italian Cuisine</span>
+                <span className="text-blue-500 text-xs font-bold uppercase">Main Course</span>
                 <h1 className="mt-4 text-xl font-semibold text-gray-800 dark:text-white">
                     Classic Margherita Pizza
                 </h1>

@@ -1,4 +1,4 @@
-import Card from "../card/Card";
+import RecipeCard from "../recipe-card/RecipeCard";
 
 export default function RecentPosts() {
     return (
@@ -9,9 +9,9 @@ export default function RecentPosts() {
                 </div>
                 <hr className="my-4 border-gray-200 dark:border-gray-700" />
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
-                    <Card />
-                    <Card />
-                    <Card />
+                    <RecipeCard />
+                    <RecipeCard />
+                    <RecipeCard />
                 </div>
             </div>
         </section>
