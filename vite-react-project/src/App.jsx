@@ -7,6 +7,7 @@ import ProtectedRoutes from "./utils/ProtectedRoutes";
 import GuestRoutes from "./utils/GuestRoutes";
 import Footer from "./components/footer/Footer";
 import RecipeDetails from "./components/recipe-details/RecipeDetails";
+import RecipeCreate from "./components/recipe-create/RecipeCreate";
 
 function App() {
 
@@ -16,10 +17,11 @@ function App() {
             
             <Routes>
 
+                <Route path="/" element={<Home />} />
                 <Route path="/recipes/details" element={<RecipeDetails />} />
                 
                 <Route element={<ProtectedRoutes />}>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/create" element={<RecipeCreate />}/>
                 </Route>
 
                 <Route element={<GuestRoutes />}>
