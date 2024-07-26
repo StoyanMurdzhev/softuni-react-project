@@ -5,13 +5,14 @@ import Register from "./components/register/Register";
 import { Route, Routes } from "react-router-dom";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import GuestRoutes from "./utils/GuestRoutes";
+import Footer from "./components/footer/Footer";
 
 function App() {
 
     return (
         <>
             <Navbar />
-
+            
             <Routes>
 
                 <Route element={<ProtectedRoutes />}>
@@ -24,6 +25,8 @@ function App() {
                 </Route>
 
             </Routes>
+
+            <Footer />
         </>
     )
 }
