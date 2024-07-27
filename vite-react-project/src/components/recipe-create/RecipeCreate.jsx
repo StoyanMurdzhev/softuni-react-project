@@ -8,7 +8,7 @@ import { submitRecipe, validateFormData } from '../../services/recipeService';
 export default function RecipeCreate() {
     const { user } = useAuth();
     const [formData, setFormData] = useState({
-        dish: "",
+        name: "",
         description: "",
         ingredients: "",
         instructions: "",
@@ -61,13 +61,13 @@ export default function RecipeCreate() {
                         <p>Post a recipe:</p>
                     </div>
                     <div className="mt-8">
-                        <label htmlFor="dish">What is the name of your dish?</label>
+                        <label htmlFor="name">What is your dish called?</label>
                         <input
                             type="text"
                             className="block w-full p-2 text-gray-700 bg-white border-2 border-black rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-black focus:border-black dark:focus:border-black focus:ring-black focus:outline-none focus:ring focus:ring-opacity-40"
-                            id="dish"
-                            name="dish"
-                            value={formData.dish}
+                            id="name"
+                            name="name"
+                            value={formData.name}
                             onChange={changeHandler}
                         />
                     </div>
