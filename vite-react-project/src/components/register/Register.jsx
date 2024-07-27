@@ -33,73 +33,123 @@ export default function Register() {
     return (
 
         <>
-            <section className="px-4 pb-24 mx-auto max-w-7xl">
-                <div className="w-full py-6 mx-auto md:w-3/5 lg:w-2/5">
-                    <h1 className="mb-1 text-xl font-medium text-center text-gray-800 md:text-3xl">
-                        Create your Free Account
-                    </h1>
-                    <p className="mb-2 text-sm font-normal text-center text-gray-700 md:text-base">
-                        It's time to cook.
-                    </p>
-                    <form onSubmit={submitHandler} className="mt-8 space-y-4">
-                        <label htmlFor="email" className="block">
-                            <span className="block mb-1 text-xs font-medium text-gray-700">
-                                Email
+            <section className="bg-white dark:bg-gray-900">
+                <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
+                    <form onSubmit={submitHandler} className="w-full max-w-md">
+
+                        <div className="flex items-center justify-center mt-6">
+                            <Link to="/login"
+                                className="w-1/3 pb-4 font-medium text-center text-gray-500 border-b dark:border-gray-400 dark:text-gray-300"
+                            >
+                                Sign In
+                            </Link>
+                            <span
+                                className="w-1/3 pb-4 font-medium text-center text-gray-800 capitalize border-b-2 border-blue-500 dark:border-blue-400 dark:text-white"
+                            >
+                                Sign Up
+                            </span>
+                        </div>
+                        
+                       
+                        <div className="relative flex items-center mt-6">
+                            <span className="absolute">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth={2}
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                    />
+                                </svg>
                             </span>
                             <input
-                                className="form-input"
-                                type="text"
+                                type="email"
+                                className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                                 id="email"
                                 name="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                required
+                                placeholder="Email address"
                             />
-                        </label>
-                        <label htmlFor="password" className="block">
-                            <span className="block mb-1 text-xs font-medium text-gray-700">
-                                Password
+                            
+                        </div>
+                        <div className="relative flex items-center mt-4">
+                            <span className="absolute">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth={2}
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                                    />
+                                </svg>
                             </span>
                             <input
-                                className="form-input"
                                 type="password"
+                                className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                                 id="password"
                                 name="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                required
+                                placeholder="Enter password"
                             />
-                        </label>
-                        <label htmlFor="repass" className="block">
-                            <span className="block mb-1 text-xs font-medium text-gray-700">
-                                Repeat password
+                        </div>
+                        <div className="relative flex items-center mt-4">
+                            <span className="absolute">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth={2}
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                                    />
+                                </svg>
                             </span>
                             <input
-                                className="form-input"
                                 type="password"
+                                className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                                 id="repass"
                                 name="repass"
                                 value={repass}
                                 onChange={(e) => setRepass(e.target.value)}
-                                required
+                                placeholder="Confirm password"
                             />
-                        </label>
-                        <button
-                            type="submit"
-                            className="w-full btn btn-primary btn-lg"
-                        >
-                            Sign up
-                        </button>
+                        </div>
+                        <div className="mt-6">
+                            <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                                Sign Up
+                            </button>
+                            <div className="mt-6 text-center">
+                                <a
+                                    href="#"
+                                    className="text-sm text-blue-500 hover:underline dark:text-blue-400"
+                                >
+                                    Already have an account?
+                                </a>
+                            </div>
+                        </div>
                     </form>
-                    {error && <p className="text-red">{error}</p> }
-                    <p className="mt-4 mb-2 text-sm font-normal text-center text-gray-700 md:text-base">
-                        Already have an account?
-                        <Link to={"/login"} className="ml-3 text-purple-700 hover:text-purple-900">
-                            Sign in
-                        </Link>
-                    </p>
                 </div>
             </section>
+
         </>
     )
 }
