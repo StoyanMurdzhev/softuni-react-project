@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, limit, startAfter } from 'firebase/firestore';
+import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, limit, startAfter, getDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase/firebase.js';
 import validator from 'validator';
 
@@ -33,6 +33,24 @@ async function submitRecipe(formData, userId) {
         return { success: false, error: "Error submitting recipe" };
     }
 };
+
+async function getById(id) {
+    try {
+        const recipeRef = doc(db, "recipes", id);
+        const recipe = await getDoc(recipeRef);
+        if (recipe.exists()) {
+            return { ...recipe.data(), id: recipe.id };
+        } else {
+            throw new Error ("Recipe not found");
+        }
+
+    } catch (error) {
+
+        console.log(error);
+        throw error
+
+    }
+}
 
 async function getLastThree() {
     try {
@@ -93,6 +111,7 @@ async function getAllWithPagination(lastVisible, pageSize = 6) {
 export {
     validateFormData,
     submitRecipe,
+    getById,
     getLastThree,
     getAllWithPagination
 }
