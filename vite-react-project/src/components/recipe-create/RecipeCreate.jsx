@@ -54,7 +54,7 @@ export default function RecipeCreate() {
 
     return (
         <section className="bg-white dark:bg-gray-900">
-            <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
+            <div className="container flex items-center justify-center min-h-screen px-6 pb-16 mx-auto">
                 <form className="w-full max-w-md" onSubmit={submitHandler}>
 
                     <div className="flex items-center justify-center">
