@@ -11,7 +11,7 @@ export default function Login() {
 
     const navigate = useNavigate();
 
-    const sumbitHandler = async (e) => {
+    async function sumbitHandler(e) {
         e.preventDefault();
         setError("");
 
@@ -33,6 +33,7 @@ export default function Login() {
                     Email:
                     <input
                         type="text"
+                        id="email"
                         name="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -42,6 +43,7 @@ export default function Login() {
                 <label htmlFor="password">
                     Password:
                     <input type="password"
+                        id="password"
                         name="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
