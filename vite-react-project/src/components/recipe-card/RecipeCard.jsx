@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
+import { convertTimestamp } from "../../services/recipeService";
 
 export default function RecipeCard({ recipe }) {
+    const datePublished = convertTimestamp(recipe);
+
     return (
+        <div className="flex flex-col justify-between h-full p-4 overflow-hidden">
         <div>
             <Link to={`/recipes/${recipe.id}/details`}>
             <img
@@ -23,10 +27,10 @@ export default function RecipeCard({ recipe }) {
                         <Link to="/"
                             className="text-lg font-medium text-gray-700 dark:text-gray-300 hover:underline hover:text-gray-500"
                         >
-                            Author name should be here
+                            Date published:
                         </Link>
                         <p className="text-sm text-gray-500 dark:text-gray-400">
-                            {recipe.ownerId}
+                            {datePublished}
                         </p>
                     </div>
                     <Link to={`/recipes/${recipe.id}/details`}
@@ -36,6 +40,7 @@ export default function RecipeCard({ recipe }) {
                     </Link>
                 </div>
             </div>
+        </div>
         </div>
     );
 }

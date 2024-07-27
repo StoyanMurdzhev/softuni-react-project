@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 
 import { useAuth } from "../../hooks/useAuth";
-import { getById } from "../../services/recipeService";
+import { convertTimestamp, getById } from "../../services/recipeService";
 
 import RecipeActionButtons from "./RecipeActionButtons";
 
@@ -35,8 +35,7 @@ export default function RecipeDetails() {
 
     const isOwner = user && user.uid === recipe.ownerId;
 
-    const recipeDate = recipe.timestamp.toDate();
-    const formattedDate = recipeDate.toISOString().split("T")[0];
+    const datePublished = convertTimestamp(recipe);
 
     return (
         <article
@@ -78,7 +77,7 @@ export default function RecipeDetails() {
                             <img src="/placeholder.jpg" alt="Couldn't find photo" />
                         </div> */}
                     <div className="ml-2">
-                        <p className="text-sm text-gray-500">{formattedDate}</p>
+                        <p className="text-sm text-gray-500">{datePublished}</p>
                     </div>
                 </Link>
             </div>

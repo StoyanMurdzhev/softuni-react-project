@@ -108,10 +108,17 @@ async function getAllWithPagination(lastVisible, pageSize = 6) {
     }
 }
 
+function convertTimestamp(recipe) {
+    const recipeDate = recipe.timestamp.toDate();
+    const formattedDate = recipeDate.toISOString().split("T")[0];
+    return formattedDate;
+}
+
 export {
     validateFormData,
     submitRecipe,
     getById,
     getLastThree,
-    getAllWithPagination
+    getAllWithPagination,
+    convertTimestamp
 }
