@@ -13,7 +13,7 @@ export default function Hero() {
                             </p>
                             <div className="flex flex-col mt-6 space-y-3 lg:space-y-0 lg:flex-row">
                                 <Link to="/recipes"
-                                    className="block px-5 py-2 text-sm font-medium tracking-wider text-center text-white transition-colors duration-300 transform bg-gray-900 rounded-md hover:bg-gray-700"
+                                    className="block px-5 py-2 text-sm font-medium tracking-wider text-center text-white transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-gray-700"
                                 >
                                     Browse Recipes
                                 </Link>
