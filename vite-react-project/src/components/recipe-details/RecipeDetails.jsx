@@ -4,7 +4,9 @@ import { useParams, Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { convertTimestamp, getById } from "../../services/recipeService";
 
-import RecipeActionButtons from "./RecipeActionButtons";
+import LikeButton from "../buttons/LikeButton";
+import EditButton from "../buttons/EditButton";
+import DeleteButton from "../buttons/DeleteButton";
 
 export default function RecipeDetails() {
     const { id } = useParams();
@@ -15,9 +17,7 @@ export default function RecipeDetails() {
     useEffect(() => {
         (async () => {
             try {
-                console.log(id);
                 const fetchedRecipe = await getById(id);
-                console.log(fetchedRecipe);
                 setRecipe(fetchedRecipe);
             } catch (err) {
                 setError(err.message);
@@ -61,14 +61,14 @@ export default function RecipeDetails() {
                     {recipe.name}
                 </h1>
                 <div className="flex mb-6 space-x-2">
-                    {recipe.tags.map(tag => 
-                        (
+                    {recipe.tags.map(tag =>
+                    (
                         <Link to="/"
                             className="text-gray-900 bg-gray-100 badge hover:bg-gray-200"
                             key={tag}>
                             {tag}
                         </Link>
-                        )
+                    )
                     )}
                 </div>
                 <Link to="/" className="flex items-center text-gray-700">
@@ -84,15 +84,22 @@ export default function RecipeDetails() {
             <div className="w-full mx-auto prose md:w-3/4 lg:w-1/2">
                 <p>{recipe.description}</p>
 
-                <p className="mt-10"> 
+                <p className="mt-10">
                     {recipe.instructions}
                 </p>
             </div>
-            {isOwner ? 
-            <RecipeActionButtons />
-            : 
-            <span>Like button coming soon</span>
-            }
+            
+            <div className="w-full mx-auto">
+
+                {isOwner ?
+                    (<>
+                        <EditButton />
+                        <DeleteButton />
+                    </>)
+                    :
+                    <LikeButton />
+                }
+            </div>
         </article>
     )
 }
