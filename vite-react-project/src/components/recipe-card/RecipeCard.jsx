@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 export default function RecipeCard({ recipe }) {
     return (
         <div>
+            <Link to={`/recipes/${recipe.id}/details`}>
             <img
                 className="object-cover object-center w-full h-64 rounded-lg lg:h-80"
                 src={recipe.imageUrl}
                 alt={recipe.name}
             />
+            </Link>
             <div className="mt-8">
                 <span className="text-blue-500 text-xs font-bold uppercase">{recipe.mealType}</span>
                 <h1 className="mt-4 text-xl font-semibold text-gray-800 dark:text-white">
