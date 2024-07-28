@@ -20,6 +20,8 @@ export default function RecipeCreate() {
     
     const navigate = useNavigate();
 
+    const ingredientPlaceholder = "2 eggs\n200g sugar"
+
     function changeHandler(e) {
         const { name, value } = e.target;
         setFormData({
@@ -50,6 +52,7 @@ export default function RecipeCreate() {
             console.log(error);
             alert(error);
         }
+
     };
 
     return (
@@ -82,12 +85,12 @@ export default function RecipeCreate() {
                             onChange={changeHandler}
                         >
                             <option value="">Select a meal type</option>
-                            <option value="main">Appetizer</option>
-                            <option value="appetizer">Main course</option>
-                            <option value="dessert">Dessert</option>
-                            <option value="side">Side</option>
-                            <option value="breakfast">Breakfast</option>
-                            <option value="snack">Snack</option>
+                            <option value="Appetizer">Appetizer</option>
+                            <option value="Main course">Main course</option>
+                            <option value="Dessert">Dessert</option>
+                            <option value="Side">Side</option>
+                            <option value="Breakfast">Breakfast</option>
+                            <option value="Snack">Snack</option>
                         </select>
                     </div>
 
@@ -105,13 +108,13 @@ export default function RecipeCreate() {
                         </textarea>
                     </div>
                     <div className="mt-4">
-                        <label htmlFor="ingredients">What are the ingredients? Please enter each ingredient separated by a comma:</label>
+                        <label htmlFor="ingredients">What are the ingredients? Please enter each ingredient on a new line:</label>
                         <textarea
                             type="text"
-                            className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                            className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 whitespace-pre-wrap overflow-auto"
                             id="ingredients"
                             name="ingredients"
-                            placeholder="e.g. pizza dough, tomato sauce, mozzarella"
+                            placeholder={ingredientPlaceholder}
                             value={formData.ingredients}
                             onChange={changeHandler}
                         ></textarea>
@@ -121,7 +124,7 @@ export default function RecipeCreate() {
                         <label htmlFor="instructions">How is the dish prepared?</label>
                         <textarea
                             type="text"
-                            className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                            className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 whitespace-pre-wrap"
                             id="instructions"
                             name="instructions"
                             value={formData.instructions}
