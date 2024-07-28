@@ -81,15 +81,31 @@ export default function RecipeDetails() {
                     </div>
                 </Link>
             </div>
-            <div className="w-full mx-auto prose md:w-3/4 lg:w-1/2">
-                <p>{recipe.description}</p>
 
-                <p className="mt-10">
-                    {recipe.instructions}
-                </p>
+            <div className="w-full mx-auto prose md:w-3/4 lg:w-1/2">
+
+                <section>
+                    <h2 className="font-bold text-2xl">Description</h2>
+                    <p className="mt-3 text-lg">{recipe.description}</p>
+                </section>
+
+                <section>
+                    <h2 className="mt-10 font-bold text-2xl">Ingredients</h2>
+                    <ul className="list-disc mt-3 pl-5">
+                        {recipe.ingredients.map(ingredient => (
+                            <li key={ingredient} className="text-lg">{ingredient}</li>
+                        ))}
+                    </ul>
+                </section>
+                
+                <section>
+                    <h2 className="mt-10 font-bold text-2xl">Instructions:</h2>
+                    <p className="mt-3 text-lg whitespace-pre-wrap">{recipe.instructions.join("\n\n")}</p>
+                </section>
+
             </div>
-            
-            <div className="w-full mx-auto">
+
+            <div className=''>
 
                 {isOwner ?
                     (<>
