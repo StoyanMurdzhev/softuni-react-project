@@ -23,7 +23,8 @@ async function submitRecipe(formData, userId) {
         await addDoc(collection(db, "recipes"), {
             ...formData,
             ownerId: userId,
-            ingredients: formData.ingredients.split(",").map(ingredient => ingredient.trim()),
+            instructions: formData.instructions.split("\n").map(instruction => instruction.trim()),
+            ingredients: formData.ingredients.split("\n").map(ingredient => ingredient.trim()),
             tags: formData.tags.split(",").map(tag => tag.trim()),
             timestamp: serverTimestamp()
         });
