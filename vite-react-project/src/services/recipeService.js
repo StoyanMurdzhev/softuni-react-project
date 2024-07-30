@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, limit, startAfter, getDoc, doc, updateDoc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, limit, startAfter, getDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase.js';
 import validator from 'validator';
 
@@ -50,6 +50,16 @@ async function editRecipe(formData, id) {
     } catch (err) {
         console.error("Error updating recipe: ", err);
         return { success: false, error: "Error updating recipe"}
+    }
+}
+
+async function deleteRecipe(id) {
+    try {
+        const recipeRef = doc(db, "recipes", id);
+        await deleteDoc(recipeRef);
+    } catch (err) {
+        console.error("Error deleting recipe: ", err);
+        return err;
     }
 }
 
@@ -144,6 +154,7 @@ export {
     validateFormData,
     postRecipe,
     editRecipe,
+    deleteRecipe,
     getById,
     getLastThree,
     getAllWithPagination,

@@ -110,7 +110,7 @@ export default function RecipeDetails() {
                 {isOwner ?
                     (<>
                         <EditButton id={id} />
-                        <DeleteButton />
+                        <DeleteButton id={id}/>
                     </>)
                     :
                     <LikeButton />
