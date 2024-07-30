@@ -29,7 +29,7 @@ export default function RecipeList() {
                         All Recipes
                     </h1>
                     <p className="max-w-lg mx-auto mt-4 text-gray-500">
-                        Here you can browse all the recipies shared by our users!
+                        Here you can browse all the recipes shared by our users!
                     </p>
                 </div>
                 <div className="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2 xl:grid-cols-3">
