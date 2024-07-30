@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, limit, startAfter, getDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, limit, startAfter, getDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase.js';
 import validator from 'validator';
 
@@ -14,6 +14,7 @@ function validateFormData(formData) {
     if (!validator.isURL(formData.imageUrl, { protocols: ['http', 'https'], require_protocol: true })) {
         errors.imageUrl = 'Please enter a valid URL';
     }
+
     console.log(errors);
     return errors;
 };
@@ -26,14 +27,31 @@ async function postRecipe(formData, userId) {
             instructions: formData.instructions.split("\n").map(instruction => instruction.trim()),
             ingredients: formData.ingredients.split("\n").map(ingredient => ingredient.trim()),
             tags: formData.tags.split(",").map(tag => tag.trim()),
-            timestamp: serverTimestamp()
+            createdOn: serverTimestamp()
         });
         return { success: true };
     } catch (err) {
-        console.error("Error adding document: ", err);
+        console.error("Error adding recipe: ", err);
         return { success: false, error: "Error submitting recipe" };
     }
 };
+
+async function editRecipe(formData, id) {
+    try {
+        const recipeRef = doc(db, "recipes", id);
+        await updateDoc(recipeRef, {
+            ...formData,
+            instructions: formData.instructions.split("\n").map(instruction => instruction.trim()),
+            ingredients: formData.ingredients.split("\n").map(ingredient => ingredient.trim()),
+            tags: formData.tags.split(",").map(tag => tag.trim()),
+            editedOn: serverTimestamp()
+        });
+        return { success: true };
+    } catch (err) {
+        console.error("Error updating recipe: ", err);
+        return { success: false, error: "Error updating recipe"}
+    }
+}
 
 async function getById(id) {
     try {
@@ -51,13 +69,13 @@ async function getById(id) {
         throw error;
 
     }
-}
+};
 
 async function getLastThree() {
     try {
         const recipesRef = collection(db, "recipes");
 
-        const q = query(recipesRef, orderBy("timestamp", "desc"), limit(3));
+        const q = query(recipesRef, orderBy("createdOn", "desc"), limit(3));
 
         const querySnapshot = await getDocs(q);
 
@@ -78,13 +96,13 @@ async function getLastThree() {
         throw error;
 
     }
-}
+};
 
 async function getAllWithPagination(lastVisible, pageSize = 6) {
     try {
         const recipesRef = collection(db, "recipes");
 
-        const q = query(recipesRef, orderBy("timestamp", "desc"), lastVisible ? startAfter(lastVisible) : limit(pageSize));
+        const q = query(recipesRef, orderBy("createdOn", "desc"), lastVisible ? startAfter(lastVisible) : limit(pageSize));
 
         const querySnapshot = await getDocs(q);
 
@@ -107,17 +125,25 @@ async function getAllWithPagination(lastVisible, pageSize = 6) {
         throw error;
 
     }
-}
+};
 
 function convertTimestamp(recipe) {
-    const recipeDate = recipe.timestamp.toDate();
+    let recipeDate;
+
+    if (recipe.editedOn) {
+        recipeDate = recipe.editedOn.toDate();
+    } else {
+        recipeDate = recipe.createdOn.toDate();
+    }
+
     const formattedDate = recipeDate.toISOString().split("T")[0];
     return formattedDate;
-}
+};
 
 export {
     validateFormData,
     postRecipe,
+    editRecipe,
     getById,
     getLastThree,
     getAllWithPagination,
