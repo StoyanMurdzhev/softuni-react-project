@@ -47,7 +47,7 @@ export default function RecipeCreate() {
         const { success, error } = await postRecipe(formData, user.uid);
         
         if (success) {
-            navigate("/");
+            navigate("/recipes");
         } else {
             console.log(error);
             alert(error);
