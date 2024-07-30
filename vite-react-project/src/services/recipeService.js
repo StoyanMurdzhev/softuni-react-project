@@ -18,7 +18,7 @@ function validateFormData(formData) {
     return errors;
 };
 
-async function submitRecipe(formData, userId) {
+async function postRecipe(formData, userId) {
     try {
         await addDoc(collection(db, "recipes"), {
             ...formData,
@@ -48,7 +48,7 @@ async function getById(id) {
     } catch (error) {
 
         console.log(error);
-        throw error
+        throw error;
 
     }
 }
@@ -117,7 +117,7 @@ function convertTimestamp(recipe) {
 
 export {
     validateFormData,
-    submitRecipe,
+    postRecipe,
     getById,
     getLastThree,
     getAllWithPagination,

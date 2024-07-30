@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth.js';
 import { useNavigate } from 'react-router-dom';
-import { submitRecipe, validateFormData } from '../../services/recipeService';
+import { postRecipe, validateFormData } from '../../services/recipeService';
 
 
 
@@ -44,7 +44,7 @@ export default function RecipeCreate() {
             return;
         }
 
-        const { success, error } = await submitRecipe(formData, user.uid);
+        const { success, error } = await postRecipe(formData, user.uid);
         
         if (success) {
             navigate("/");
