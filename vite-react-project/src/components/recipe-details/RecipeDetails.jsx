@@ -35,7 +35,7 @@ export default function RecipeDetails() {
 
     const isOwner = user && user.uid === recipe.ownerId;
 
-    const datePublished = convertTimestamp(recipe);
+    const recipeTimestamp = convertTimestamp(recipe);
 
     return (
         <article
@@ -60,7 +60,7 @@ export default function RecipeDetails() {
                 >
                     {recipe.name}
                 </h1>
-                <div className="flex mb-6 space-x-2">
+                <div className="flex mb-4 space-x-2">
                     {recipe.tags.map(tag =>
                     (
                         <Link to="/"
@@ -76,8 +76,8 @@ export default function RecipeDetails() {
                             <p className="text-sm font-semibold text-gray-800">Probably God</p>
                             <img src="/placeholder.jpg" alt="Couldn't find photo" />
                         </div> */}
-                    <div className="ml-2">
-                        <p className="text-sm text-gray-500">{datePublished}</p>
+                    <div>
+                        <p className="text-sm text-gray-500">{recipe.editedOn ? "Last updated:" : "Date published:"} {recipeTimestamp}</p>
                     </div>
                 </Link>
             </div>
@@ -109,7 +109,7 @@ export default function RecipeDetails() {
 
                 {isOwner ?
                     (<>
-                        <EditButton />
+                        <EditButton id={id} />
                         <DeleteButton />
                     </>)
                     :

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { convertTimestamp } from "../../services/recipeService";
 
 export default function RecipeCard({ recipe }) {
-    const datePublished = convertTimestamp(recipe);
+    const recipeTimestamp = convertTimestamp(recipe);
 
     return (
         <div className="flex flex-col justify-between h-full p-4 overflow-hidden">
@@ -27,10 +27,10 @@ export default function RecipeCard({ recipe }) {
                         <Link to="/"
                             className="text-lg font-medium text-gray-700 dark:text-gray-300 hover:underline hover:text-gray-500"
                         >
-                            Date published:
+                           {recipe.editedOn ? "Last updated:" : "Date published:"}
                         </Link>
                         <p className="text-sm text-gray-500 dark:text-gray-400">
-                            {datePublished}
+                            {recipeTimestamp}
                         </p>
                     </div>
                     <Link to={`/recipes/${recipe.id}/details`}
