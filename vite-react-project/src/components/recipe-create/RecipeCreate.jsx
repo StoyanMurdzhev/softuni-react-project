@@ -24,10 +24,10 @@ export default function RecipeCreate() {
 
     function changeHandler(e) {
         const { name, value } = e.target;
-        setFormData({
+        setFormData(formData => ({
             ...formData,
             [name]: value
-        });
+        }));
     };
 
     async function submitHandler(e) {
