@@ -40,9 +40,6 @@ export default function RecipeDetails() {
     return (
         <article
             className="px-4 py-24 mx-auto max-w-7xl"
-            itemID="#"
-            itemScope=""
-            itemType="http://schema.org/BlogPosting"
         >
             <div className="w-full mx-auto mb-12 text-left md:w-3/4 lg:w-1/2">
                 <img
@@ -105,7 +102,7 @@ export default function RecipeDetails() {
 
             </div>
 
-            <div className=''>
+            <div className="mt-10 w-300 flex justify-center items-center">
 
                 {isOwner ?
                     (<>
