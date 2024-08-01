@@ -11,13 +11,18 @@ import DeleteButton from "../buttons/DeleteButton";
 export default function RecipeDetails() {
     const { id } = useParams();
     const { user } = useAuth();
+
     const [recipe, setRecipe] = useState(null);
     const [error, setError] = useState(null);
+    const [userHasLiked, setUserHasLiked] = useState(false);
 
     useEffect(() => {
         (async () => {
             try {
                 const fetchedRecipe = await getById(id);
+                if (fetchedRecipe.likes.likedBy.includes(user.uid)) {
+                    setUserHasLiked(true);
+                };
                 setRecipe(fetchedRecipe);
             } catch (err) {
                 setError(err.message);
@@ -36,6 +41,17 @@ export default function RecipeDetails() {
     const isOwner = user && user.uid === recipe.ownerId;
 
     const recipeTimestamp = convertTimestamp(recipe);
+
+    function onLike() {
+        setUserHasLiked(true);
+        setRecipe(prevRecipe => ({
+            ...prevRecipe,
+            likes: {
+                count: prevRecipe.likes.count + 1,
+                likedBy: [...prevRecipe.likes.likedBy, user.uid]
+            }
+        }));
+    };
 
     return (
         <article
@@ -110,7 +126,10 @@ export default function RecipeDetails() {
                         <DeleteButton id={id}/>
                     </>)
                     :
-                    <LikeButton />
+                    <>
+                        <span className="mr-5">{recipe.likes.count} {recipe.likes.count == 1 ? "like" : "likes"}</span>
+                        {!userHasLiked && <LikeButton id={id} userId={user.uid} onLike={onLike} />}
+                    </>
                 }
             </div>
         </article>

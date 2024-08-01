@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, limit, startAfter, getDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, limit, startAfter, getDoc, doc, updateDoc, deleteDoc, increment, arrayUnion } from 'firebase/firestore';
 import { db } from '../firebase/firebase.js';
 import validator from 'validator';
 
@@ -36,7 +36,11 @@ async function postRecipe(formData, userId) {
             instructions: formData.instructions.split("\n").map(instruction => instruction.trim()),
             ingredients: formData.ingredients.split("\n").map(ingredient => ingredient.trim()),
             tags: formData.tags.split(",").map(tag => tag.trim()),
-            createdOn: serverTimestamp()
+            createdOn: serverTimestamp(),
+            likes: {
+                count: 0,
+                likedBy: []
+            }
         });
         return { success: true };
     } catch (err) {
@@ -157,6 +161,25 @@ function convertTimestamp(recipe) {
     return formattedDate;
 };
 
+async function likeRecipe(id, userId) {
+    try {
+        const recipeRef = doc(db, "recipes", id);
+        const recipe = await getDoc(recipeRef);
+        const { likes } = recipe.data();
+
+        if (likes.likedBy.includes(userId)) {
+            throw new Error("You have already liked this article.")
+        }
+
+        await updateDoc(recipeRef, {
+            "likes.count": increment(1),
+            "likes.likedBy": arrayUnion(userId)
+        });
+    } catch (err) {
+        throw err;
+    }
+}
+
 export {
     validateFormData,
     postRecipe,
@@ -165,5 +188,6 @@ export {
     getById,
     getLastThree,
     getAllWithPagination,
+    likeRecipe,
     convertTimestamp
 }
