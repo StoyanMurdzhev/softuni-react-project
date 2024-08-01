@@ -12,6 +12,7 @@ import RecipeDetails from "./components/recipe-details/RecipeDetails";
 import RecipeCreate from "./components/recipe-create/RecipeCreate";
 import RecipeList from "./components/recipe-list/RecipeList";
 import RecipeEdit from "./components/recipe-edit/RecipeEdit";
+import NotFound from "./components/not-found/NotFound";
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
             <Navbar />
             
             <Routes>
-
+                <Route path="*" element={<NotFound />} />
                 <Route path="/" element={<Home />} />
                 <Route path="/recipes" element={<RecipeList />}/>
                 <Route path="/recipes/:id/details" element={<RecipeDetails />} />
