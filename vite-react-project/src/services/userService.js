@@ -6,14 +6,12 @@ async function login(email, password) {
         await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
         
-        console.log(error.message);
-        
         if (error.code === "auth/wrong-password" || error.code === "auth/user-not-found" || error.code === "auth/invalid-credential") {
             throw new Error("Incorrect email or password.");
         } else if (error.code === "auth/invalid-email") {
             throw new Error("Please enter a valid email address.");
         } else {
-            throw new Error("Error logging in.");
+            throw new Error("Error logging in. Please try again later.");
         }
         
     }

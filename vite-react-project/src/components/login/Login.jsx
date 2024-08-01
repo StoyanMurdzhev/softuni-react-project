@@ -19,7 +19,6 @@ export default function Login() {
             await login(email, password);
             navigate("/");
         } catch (err) {
-            console.log(err.message);
             setError(err.message);
             setPassword("");
         }
@@ -101,6 +100,8 @@ export default function Login() {
                                 placeholder="Enter password"
                             />
                         </div>
+
+                        {error && <p className="text-red-500 mt-2">{error}</p>}
                         
                         <div className="mt-6">
                             <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
