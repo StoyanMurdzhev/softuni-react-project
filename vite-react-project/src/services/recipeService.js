@@ -25,7 +25,6 @@ function validateFormData(formData) {
         errors.imageUrl = "Please enter a valid URL";
     }
 
-    console.log(errors);
     return errors;
 };
 
@@ -41,8 +40,7 @@ async function postRecipe(formData, userId) {
         });
         return { success: true };
     } catch (err) {
-        console.error("Error adding recipe: ", err);
-        return { success: false, error: "Error submitting recipe" };
+        return { success: false, error: "Error submitting recipe. Please try again later." };
     }
 };
 
@@ -58,8 +56,7 @@ async function editRecipe(formData, id) {
         });
         return { success: true };
     } catch (err) {
-        console.error("Error updating recipe: ", err);
-        return { success: false, error: "Error updating recipe"}
+        return { success: false, error: "Error updating recipe. Please try again later."}
     }
 }
 

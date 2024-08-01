@@ -49,7 +49,6 @@ export default function RecipeCreate() {
         if (success) {
             navigate("/recipes");
         } else {
-            console.log(error);
             alert(error);
         }
 
