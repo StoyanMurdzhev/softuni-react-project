@@ -30,12 +30,10 @@ async function register(email, password, repass) {
 
     if (password.length < 6) {
         errors.password = "Password should be at least six characters long."
-        throw errors;
     }
     
     if (password !== repass) {
             errors.repass = "Passwords do not match.";
-            throw errors;
         }
     
     try {
