@@ -67,18 +67,19 @@ export default function RecipeCreate() {
                         <label htmlFor="name">What is your dish called?</label>
                         <input
                             type="text"
-                            className="block w-full p-2 text-gray-700 bg-white border-2 border-black rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-black focus:border-black dark:focus:border-black focus:ring-black focus:outline-none focus:ring focus:ring-opacity-40"
+                            className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             id="name"
                             name="name"
                             value={formData.name}
                             onChange={changeHandler}
                         />
+                        {errors.name && <p className="text-red-500">{errors.name}</p>}
                     </div>
 
                     <div className="mt-4">
                         <label htmlFor="mealType">What type of meal is it?</label>
                         <select
-                            className="block w-full p-2 text-gray-700 bg-white border-2 border-black rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-black focus:border-black dark:focus:border-black focus:ring-black focus:outline-none focus:ring focus:ring-opacity-40"
+                            className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             id="mealType"
                             name="mealType"
                             value={formData.mealType}
@@ -92,6 +93,7 @@ export default function RecipeCreate() {
                             <option value="Breakfast">Breakfast</option>
                             <option value="Snack">Snack</option>
                         </select>
+                        {errors.mealType && <p className="text-red-500">{errors.mealType}</p>}
                     </div>
 
 
@@ -106,6 +108,7 @@ export default function RecipeCreate() {
                             onChange={changeHandler}
                         >
                         </textarea>
+                        {errors.description && <p className="text-red-500">{errors.description}</p>}
                     </div>
                     <div className="mt-4">
                         <label htmlFor="ingredients">What are the ingredients? Please enter each ingredient on a new line:</label>
@@ -118,6 +121,7 @@ export default function RecipeCreate() {
                             value={formData.ingredients}
                             onChange={changeHandler}
                         ></textarea>
+                        {errors.ingredients && <p className="text-red-500">{errors.ingredients}</p>}
                     </div>
 
                     <div className="mt-4">
@@ -130,32 +134,35 @@ export default function RecipeCreate() {
                             value={formData.instructions}
                             onChange={changeHandler}
                         ></textarea>
+                        {errors.instructions && <p className="text-red-500">{errors.instructions}</p>}
                     </div>
 
                     <div className="mt-2">
                         <label htmlFor="imageUrl">Add a link to an image of your dish:</label>
                         <input
                             type="text"
-                            className="block w-full p-2 text-gray-700 bg-white border-2 border-black rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-black focus:border-black dark:focus:border-black focus:ring-black focus:outline-none focus:ring focus:ring-opacity-40"
+                            className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             id="imageUrl"
                             name="imageUrl"
                             placeholder="e.g. https://imagehost.com/img"
                             value={formData.imageUrl}
                             onChange={changeHandler}
                         />
+                        {errors.imageUrl && <p className="text-red-500">{errors.imageUrl}</p>}
                     </div>
 
                     <div className="mt-2">
                         <label htmlFor="tags">Add tags, separated by a comma, to make finding your recipe easier!</label>
                         <input
                             type="text"
-                            className="block w-full p-2 text-gray-700 bg-white border-2 border-black rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-black focus:border-black dark:focus:border-black focus:ring-black focus:outline-none focus:ring focus:ring-opacity-40"
+                            className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             id="tags"
                             name="tags"
                             placeholder="e.g. pizza, italian cuisine"
                             value={formData.tags}
                             onChange={changeHandler}
                         />
+                        {errors.tags && <p className="text-red-500">{errors.tags}</p>}
                     </div>
 
                     <div className="mt-6">

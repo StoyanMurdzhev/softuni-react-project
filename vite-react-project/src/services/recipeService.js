@@ -7,12 +7,22 @@ function validateFormData(formData) {
 
     for (const key in formData) {
         if (!formData[key]) {
-            errors[key] = 'This field is required';
+            errors[key] = "This field is required.";
         }
     }
 
+    if (formData.name.length && formData.name.length < 2) {
+        errors.name = "Name must be at least two characters long."
+    }
+    if (formData.description.length && formData.description.length < 10) {
+        errors.description = "Description must be at least ten characters long."
+    }
+    if (formData.instructions.length && formData.instructions.length < 10) {
+        errors.description = "Instructions must be at least ten characters long."
+    }
+
     if (!validator.isURL(formData.imageUrl, { protocols: ['http', 'https'], require_protocol: true })) {
-        errors.imageUrl = 'Please enter a valid URL';
+        errors.imageUrl = "Please enter a valid URL";
     }
 
     console.log(errors);
