@@ -18,7 +18,7 @@ function validateFormData(formData) {
         errors.description = "Description must be at least ten characters long."
     }
     if (formData.instructions.length && formData.instructions.length < 10) {
-        errors.description = "Instructions must be at least ten characters long."
+        errors.instructions = "Instructions must be at least ten characters long."
     }
 
     if (!validator.isURL(formData.imageUrl, { protocols: ['http', 'https'], require_protocol: true })) {
