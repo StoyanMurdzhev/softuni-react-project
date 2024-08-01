@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { register } from "../../services/userService";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -7,26 +7,28 @@ export default function Register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [repass, setRepass] = useState("");
-    const [error, setError] = useState("");
+    const [errors, setErrors] = useState({});
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (errors.password) {
+            setPassword("");
+            setRepass("");
+        }
+        if(errors.repass) {
+            setRepass("");
+        }
+    }, [errors]);
 
     async function submitHandler(e) {
         e.preventDefault();
 
-        if (password !== repass) {
-            setError("Passwords do not match.");
-            setRepass("");
-            return;
-        }
-
         try {
-            await register(email, password);
+            await register(email, password, repass);
             navigate("/");
         } catch (err) {
-            setError(err.message);
-            setPassword("");
-            setRepass("");
+            setErrors(err);
         }
     }
 
@@ -69,16 +71,23 @@ export default function Register() {
                                 </svg>
                             </span>
                             <input
-                                type="email"
+                                type="text"
                                 className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                                 id="email"
                                 name="email"
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={(e) => {
+                                    setEmail(e.target.value);
+                                    setErrors({});
+                                }}
                                 placeholder="Email address"
+                                autoComplete="email"
                             />
                             
                         </div>
+                            {errors.email && <p className="text-red-500">{errors.email}</p>}
+
+
                         <div className="relative flex items-center mt-4">
                             <span className="absolute">
                                 <svg
@@ -102,10 +111,16 @@ export default function Register() {
                                 id="password"
                                 name="password"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={(e) => {
+                                    setPassword(e.target.value);
+                                    setErrors({});
+                                }}
                                 placeholder="Enter password"
                             />
                         </div>
+                            {errors.password && <p className="text-red-500">{errors.password}</p>}
+
+
                         <div className="relative flex items-center mt-4">
                             <span className="absolute">
                                 <svg
@@ -129,10 +144,17 @@ export default function Register() {
                                 id="repass"
                                 name="repass"
                                 value={repass}
-                                onChange={(e) => setRepass(e.target.value)}
+                                onChange={(e) => {
+                                    setRepass(e.target.value);
+                                    setErrors({});
+                                }}
                                 placeholder="Confirm password"
+                                autoComplete="off"
                             />
                         </div>
+                            {errors.repass && <p className="text-red-500">{errors.repass}</p>}
+
+
                         <div className="mt-6">
                             <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                                 Sign Up

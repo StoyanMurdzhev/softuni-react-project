@@ -27,19 +27,33 @@ async function logout() {
     }
 }
 
-async function register(email, password) {
+async function register(email, password, repass) {
+    const errors = {};
+
+    if (password.length < 6) {
+        errors.password = "Password should be at least six characters long."
+        throw errors;
+    }
+    
+    if (password !== repass) {
+            errors.repass = "Passwords do not match.";
+            throw errors;
+        }
+    
     try {
         await createUserWithEmailAndPassword(auth, email, password)
     } catch (error) {
-        if (error.code === "auth/weak-password") {
-            throw new Error("Password should be at least 6 characters long.");
-        } else if (error.code === "auth/invalid-email") {
-            throw new Error("Please enter a valid email address.");
+
+        if (error.code === "auth/invalid-email") {
+            errors.email = "Please enter a valid email address.";
         } else if (error.code === "auth/email-already-in-use") {
-            throw new Error("This email is already in use.");
+            errors.email= "This email is already in use.";
         } else {
-            throw new Error("Error creating an account.");
+            errors.msg = "Error creating an account. Please try again later.";
         }
+
+        throw errors;
+        
     }
 }
 
