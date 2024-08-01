@@ -65,7 +65,6 @@ export default function RecipeEdit() {
         if (success) {
             navigate(`/recipes/${id}/details`);
         } else {
-            console.log(error);
             alert(error);
         }
         
@@ -91,6 +90,7 @@ export default function RecipeEdit() {
                             value={formData.name}
                             onChange={changeHandler}
                         />
+                        {errors.name && <p className="text-red-500">{errors.name}</p>}
                     </div>
 
                     <div className="mt-4">
@@ -110,6 +110,7 @@ export default function RecipeEdit() {
                             <option value="Breakfast">Breakfast</option>
                             <option value="Snack">Snack</option>
                         </select>
+                        {errors.mealType && <p className="text-red-500">{errors.mealType}</p>}
                     </div>
 
 
@@ -124,6 +125,7 @@ export default function RecipeEdit() {
                             onChange={changeHandler}
                         >
                         </textarea>
+                        {errors.description && <p className="text-red-500">{errors.description}</p>}
                     </div>
                     <div className="mt-4">
                         <label htmlFor="ingredients">What are the ingredients? Please enter each ingredient on a new line:</label>
@@ -136,6 +138,7 @@ export default function RecipeEdit() {
                             value={formData.ingredients}
                             onChange={changeHandler}
                         ></textarea>
+                        {errors.ingredients && <p className="text-red-500">{errors.ingredients}</p>}
                     </div>
 
                     <div className="mt-4">
@@ -148,6 +151,7 @@ export default function RecipeEdit() {
                             value={formData.instructions}
                             onChange={changeHandler}
                         ></textarea>
+                        {errors.instructions && <p className="text-red-500">{errors.instructions}</p>}
                     </div>
 
                     <div className="mt-2">
@@ -161,6 +165,7 @@ export default function RecipeEdit() {
                             value={formData.imageUrl}
                             onChange={changeHandler}
                         />
+                        {errors.imageUrl && <p className="text-red-500">{errors.imageUrl}</p>}
                     </div>
 
                     <div className="mt-2">
@@ -174,6 +179,7 @@ export default function RecipeEdit() {
                             value={formData.tags}
                             onChange={changeHandler}
                         />
+                        {errors.tags && <p className="text-red-500">{errors.tags}</p>}
                     </div>
 
                     <div className="mt-6">
