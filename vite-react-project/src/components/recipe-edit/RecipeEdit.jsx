@@ -34,10 +34,14 @@ export default function RecipeEdit() {
                 setFormData({ 
                     ...fetchedRecipe,
                     ingredients: fetchedRecipe.ingredients.join("\n"),
-                    instructions: fetchedRecipe.instructions.join("\n")
+                    instructions: fetchedRecipe.instructions.join("\n"),
+                    tags: fetchedRecipe.tags.join(", ")
                 });
             } catch (err) {
-                console.log(err);
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    msg: err.message
+                }))
             }
         })();
     }, [id]);   
@@ -60,12 +64,15 @@ export default function RecipeEdit() {
             return;
         }
         
-        const { success, error } = await editRecipe(formData, id);
+        const { success, errorMsg } = await editRecipe(formData, id);
         
         if (success) {
             navigate(`/recipes/${id}/details`);
         } else {
-            alert(error);
+            setErrors(prevErrors => ({
+                ...prevErrors,
+                msg: errorMsg
+            }));
         }
         
     };

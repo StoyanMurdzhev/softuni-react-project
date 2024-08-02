@@ -60,7 +60,7 @@ async function editRecipe(formData, id) {
         });
         return { success: true };
     } catch (err) {
-        return { success: false, error: "Error updating recipe. Please try again later."}
+        return { success: false, errorMsg: err.message}
     }
 }
 
@@ -69,8 +69,7 @@ async function deleteRecipe(id) {
         const recipeRef = doc(db, "recipes", id);
         await deleteDoc(recipeRef);
     } catch (err) {
-        console.error("Error deleting recipe: ", err);
-        return err;
+        throw err;
     }
 }
 
@@ -84,11 +83,8 @@ async function getById(id) {
             throw new Error ("Recipe not found");
         }
 
-    } catch (error) {
-
-        console.log(error);
-        throw error;
-
+    } catch (err) {
+        throw err;
     }
 };
 
