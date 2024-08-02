@@ -115,22 +115,16 @@ async function getLastThree() {
     }
 };
 
-async function getAllWithPagination(lastVisible, pageSize = 6) {
+async function getAllWithPagination(lastVisible, pageSize) {
     try {
         const recipesRef = collection(db, "recipes");
+        console.log(lastVisible);
 
         const q = query(recipesRef, orderBy("createdOn", "desc"), lastVisible ? startAfter(lastVisible) : limit(pageSize));
 
         const querySnapshot = await getDocs(q);
 
-        const recipes = querySnapshot.docs.map(
-            doc => (
-                {
-                    ...doc.data(),
-                    id: doc.id
-                }
-            )
-        );
+        const recipes = querySnapshot.docs;
 
         const lastVisibleRecipe = querySnapshot.docs[querySnapshot.docs.length - 1];
 

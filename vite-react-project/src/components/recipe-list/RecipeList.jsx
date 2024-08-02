@@ -8,17 +8,54 @@ export default function RecipeList() {
     const [recipes, setRecipes] = useState([]);
     const [lastVisible, setLastVisible] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [hasMoreRecipes, setHasMoreRecipes] = useState(true);
 
     async function getMore() {
+        const pageSize = 6;
         setIsLoading(true);
-        const { recipes: nextRecipes, lastVisibleRecipe } = await getAllWithPagination(lastVisible);
+        console.log(lastVisible.name);
+        const { recipes, lastVisibleRecipe } = await getAllWithPagination(lastVisible, pageSize);
+        const nextRecipes = recipes.map(recipe => (
+            {
+                ...recipe.data(),
+                id: recipe.id
+            }
+        )
+)
         setRecipes(previousRecipes => [...previousRecipes, ...nextRecipes]);
+        console.log(lastVisibleRecipe.name);
         setLastVisible(lastVisibleRecipe);
         setIsLoading(false);
+        if (nextRecipes.length < 6) {
+            setHasMoreRecipes(false);
+        }
     }
 
     useEffect(() => {
-        getMore();
+        (async () => {
+            console.log("Invocation");
+            const pageSize = 7;
+            const { recipes } =  await getAllWithPagination(null, pageSize);
+            const nextRecipes = recipes.map(recipe => (
+                    {
+                        ...recipe.data(),
+                        id: recipe.id
+                    }
+                ));
+                if (recipes.length < 7) {
+                setRecipes(nextRecipes);
+                setHasMoreRecipes(false);
+            } else {
+                console.log(recipes.slice(0,6));
+                setRecipes(recipes.slice(0, 6).map((recipe => (
+                    {
+                        ...recipe.data(),
+                        id: recipe.id
+                    }
+                ))));
+                setLastVisible(recipes[5]);
+            }
+        })();
     }, [])
 
     return (
@@ -38,7 +75,7 @@ export default function RecipeList() {
                     ))}
                     {isLoading 
                     ? <p>Loading...</p> 
-                    : <button onClick={getMore}>Load more recipes</button>}
+                    : hasMoreRecipes && <button onClick={() => getMore()}>Load more recipes</button>}
                 </div>
             </div>
         </section>
