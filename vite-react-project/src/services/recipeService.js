@@ -127,12 +127,14 @@ async function getAllWithPagination(lastVisible, pageSize) {
         }
 
         const querySnapshot = await getDocs(myQuery);
-
         const recipes = querySnapshot.docs;
-
         const lastVisibleRecipe = querySnapshot.docs[querySnapshot.docs.length - 1];
 
-        return { recipes, lastVisibleRecipe };
+        const nextRecipeQuery = query(recipesRef, orderBy("createdOn", "desc"), startAfter(lastVisibleRecipe), limit(1));
+        const nextRecipeSnapshot = await getDocs(nextRecipeQuery);
+        const isLastBatch = !!nextRecipeSnapshot.empty;
+
+        return { recipes, lastVisibleRecipe, isLastBatch };
 
     } catch (error) {
 

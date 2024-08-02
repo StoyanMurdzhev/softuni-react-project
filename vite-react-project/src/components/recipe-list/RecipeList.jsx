@@ -17,7 +17,7 @@ export default function RecipeList() {
 
         try {
 
-            const { recipes, lastVisibleRecipe } = await getAllWithPagination(lastVisible, pageSize);
+            const { recipes, lastVisibleRecipe, isLastBatch } = await getAllWithPagination(lastVisible, pageSize);
             const nextRecipes = recipes.map(recipe => (
                 {
                     ...recipe.data(),
@@ -29,7 +29,7 @@ export default function RecipeList() {
 
             setLastVisible(lastVisibleRecipe);
 
-            if (nextRecipes.length < pageSize) {
+            if (nextRecipes.length < pageSize || isLastBatch) {
                 setHasMoreRecipes(false);
             }
         } catch (err) {
