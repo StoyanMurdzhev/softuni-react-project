@@ -120,9 +120,13 @@ async function getAllWithPagination(lastVisible, pageSize) {
         const recipesRef = collection(db, "recipes");
         console.log(lastVisible);
 
-        const q = query(recipesRef, orderBy("createdOn", "desc"), lastVisible ? startAfter(lastVisible) : limit(pageSize));
+        let myQuery = query(recipesRef, orderBy("createdOn", "desc"), limit(pageSize));
+        
+        if (lastVisible) {
+            myQuery = query(recipesRef, orderBy("createdOn", "desc"), startAfter(lastVisible), limit(pageSize));
+        }
 
-        const querySnapshot = await getDocs(q);
+        const querySnapshot = await getDocs(myQuery);
 
         const recipes = querySnapshot.docs;
 

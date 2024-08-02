@@ -13,48 +13,57 @@ export default function RecipeList() {
     async function getMore() {
         const pageSize = 6;
         setIsLoading(true);
-        console.log(lastVisible.name);
-        const { recipes, lastVisibleRecipe } = await getAllWithPagination(lastVisible, pageSize);
-        const nextRecipes = recipes.map(recipe => (
-            {
-                ...recipe.data(),
-                id: recipe.id
+        console.log();
+
+        try {
+
+            const { recipes, lastVisibleRecipe } = await getAllWithPagination(lastVisible, pageSize);
+            const nextRecipes = recipes.map(recipe => (
+                {
+                    ...recipe.data(),
+                    id: recipe.id
+                }
+            )
+            )
+            setRecipes(previousRecipes => [...previousRecipes, ...nextRecipes]);
+
+            setLastVisible(lastVisibleRecipe);
+
+            if (nextRecipes.length < pageSize) {
+                setHasMoreRecipes(false);
             }
-        )
-)
-        setRecipes(previousRecipes => [...previousRecipes, ...nextRecipes]);
-        console.log(lastVisibleRecipe.name);
-        setLastVisible(lastVisibleRecipe);
-        setIsLoading(false);
-        if (nextRecipes.length < 6) {
-            setHasMoreRecipes(false);
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setIsLoading(false);
         }
+
     }
 
     useEffect(() => {
         (async () => {
-            console.log("Invocation");
-            const pageSize = 7;
-            const { recipes } =  await getAllWithPagination(null, pageSize);
-            const nextRecipes = recipes.map(recipe => (
+
+            try {
+                console.log("Invocation");
+                const pageSize = 7;
+                const { recipes } = await getAllWithPagination(null, pageSize);
+                const initialRecipes = recipes.map(recipe => (
                     {
                         ...recipe.data(),
                         id: recipe.id
                     }
                 ));
-                if (recipes.length < 7) {
-                setRecipes(nextRecipes);
-                setHasMoreRecipes(false);
-            } else {
-                console.log(recipes.slice(0,6));
-                setRecipes(recipes.slice(0, 6).map((recipe => (
-                    {
-                        ...recipe.data(),
-                        id: recipe.id
-                    }
-                ))));
+                setRecipes(initialRecipes.slice(0, 6));
                 setLastVisible(recipes[5]);
+
+                if (initialRecipes.length < pageSize) {
+                    setHasMoreRecipes(false);
+                }
+
+            } catch (err) {
+                console.error(err);
             }
+
         })();
     }, [])
 
@@ -73,9 +82,9 @@ export default function RecipeList() {
                     {recipes.map(recipe => (
                         <RecipeCard key={recipe.id} recipe={recipe} />
                     ))}
-                    {isLoading 
-                    ? <p>Loading...</p> 
-                    : hasMoreRecipes && <button onClick={() => getMore()}>Load more recipes</button>}
+                    {isLoading
+                        ? <p>Loading...</p>
+                        : hasMoreRecipes && <button onClick={() => getMore()}>Load more recipes</button>}
                 </div>
             </div>
         </section>
