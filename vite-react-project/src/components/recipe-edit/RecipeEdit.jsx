@@ -91,7 +91,7 @@ export default function RecipeEdit() {
                         <label htmlFor="name">What is your dish called?</label>
                         <input
                             type="text"
-                            className="block w-full p-2 text-gray-700 bg-white border-2 border-black rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-black focus:border-black dark:focus:border-black focus:ring-black focus:outline-none focus:ring focus:ring-opacity-40"
+                            className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             id="name"
                             name="name"
                             value={formData.name}
@@ -103,7 +103,7 @@ export default function RecipeEdit() {
                     <div className="mt-4">
                         <label htmlFor="mealType">What type of meal is it?</label>
                         <select
-                            className="block w-full p-2 text-gray-700 bg-white border-2 border-black rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-black focus:border-black dark:focus:border-black focus:ring-black focus:outline-none focus:ring focus:ring-opacity-40"
+                            className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             id="mealType"
                             name="mealType"
                             value={formData.mealType}
@@ -165,7 +165,7 @@ export default function RecipeEdit() {
                         <label htmlFor="imageUrl">Add a link to an image of your dish:</label>
                         <input
                             type="text"
-                            className="block w-full p-2 text-gray-700 bg-white border-2 border-black rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-black focus:border-black dark:focus:border-black focus:ring-black focus:outline-none focus:ring focus:ring-opacity-40"
+                            className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             id="imageUrl"
                             name="imageUrl"
                             placeholder="e.g. https://imagehost.com/img"
@@ -179,7 +179,7 @@ export default function RecipeEdit() {
                         <label htmlFor="tags">Add tags, separated by a comma, to make finding your recipe easier!</label>
                         <input
                             type="text"
-                            className="block w-full p-2 text-gray-700 bg-white border-2 border-black rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-black focus:border-black dark:focus:border-black focus:ring-black focus:outline-none focus:ring focus:ring-opacity-40"
+                            className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             id="tags"
                             name="tags"
                             placeholder="e.g. pizza, italian cuisine"
