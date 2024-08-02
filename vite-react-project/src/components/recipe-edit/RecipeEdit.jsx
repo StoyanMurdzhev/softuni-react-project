@@ -194,6 +194,8 @@ export default function RecipeEdit() {
                             Update your recipe!
                         </button>
                     </div>
+
+                    {errors.msg && <p className='text-red-500'>Error updating recipe. Please try again later.</p>}
                 </form>
             </div>
         </section>
