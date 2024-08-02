@@ -17,7 +17,7 @@ export default function DeleteButton({ id }) {
             await deleteRecipe(id);
             navigate("/recipes");
         } catch (error) {
-            console.log(error);
+            alert(`Error deleting recipe: ${err.message}`);
         }
     }
 
