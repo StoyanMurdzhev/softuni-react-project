@@ -82,9 +82,11 @@ export default function RecipeList() {
                     {recipes.map(recipe => (
                         <RecipeCard key={recipe.id} recipe={recipe} />
                     ))}
-                    {isLoading
+                </div>
+                <div className="flex justify-center mt-8">
+                        {isLoading
                         ? <p>Loading...</p>
-                        : hasMoreRecipes && <button onClick={() => getMore()}>Load more recipes</button>}
+                        : hasMoreRecipes && <button onClick={() => getMore()} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Load more recipes</button>}
                 </div>
             </div>
         </section>
