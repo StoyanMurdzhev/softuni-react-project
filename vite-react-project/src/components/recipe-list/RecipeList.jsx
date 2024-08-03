@@ -117,7 +117,7 @@ export default function RecipeList() {
 
                 {error ?
                     (
-                        <p className="max-w-lg mx-auto mt-4 text-gray-500">
+                        <p className="max-w-lg mx-auto mt-14 text-gray-500 text-center text-2xl">
                             {error.message}
                         </p>)
                     : (
