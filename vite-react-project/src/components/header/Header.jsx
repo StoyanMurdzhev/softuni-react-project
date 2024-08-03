@@ -2,6 +2,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../services/userService';
 import { useAuth } from '../../hooks/useAuth';
 
+import homeIcon from "../../assets/home-icon.svg";
+
 export default function Navbar() {
 
     const { user } = useAuth();
@@ -24,7 +26,7 @@ export default function Navbar() {
                     <Link to="/" className="mx-auto ">
                         <img
                             className="w-auto h-6 sm:h-7"
-                            src="https://firebasestorage.googleapis.com/v0/b/softuni-react-spa-project.appspot.com/o/home_2550369.png?alt=media&token=cffe9db7-9a2f-4531-9067-49852d6a0007"
+                            src={homeIcon}
                             alt=""
                         />
                     </Link>
@@ -44,6 +46,12 @@ export default function Navbar() {
                                 className="block px-3 py-2 text-gray-600 rounded-lg dark:text-gray-200 hover:bg-gray-100 lg:mx-2"
                             >
                                 Post a recipe
+                            </Link>
+                            
+                            <Link to="/my-recipes"
+                                className="block px-3 py-2 text-gray-600 rounded-lg dark:text-gray-200 hover:bg-gray-100 lg:mx-2"
+                            >
+                                My recipes
                             </Link>
 
                             <button
