@@ -84,7 +84,7 @@ export default function RecipeCreate() {
                         >
                             <option value="">Select a meal type</option>
                             {mealTypes.map(type => (
-                                <option value={type}>{type}</option>
+                                <option value={type} key={type}>{type}</option>
                             ))}
                         </select>
                         {errors.mealType && <p className="text-red-500">{errors.mealType}</p>}
