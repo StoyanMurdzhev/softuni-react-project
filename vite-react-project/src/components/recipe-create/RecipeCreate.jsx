@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth.js';
 import { useNavigate } from 'react-router-dom';
 import { postRecipe, validateFormData } from '../../services/recipeService';
-
+import { ingredientPlaceholder, mealTypes } from '../../constants.js';
 
 
 export default function RecipeCreate() {
@@ -19,8 +19,6 @@ export default function RecipeCreate() {
     const [errors, setErrors] = useState({});
     
     const navigate = useNavigate();
-
-    const ingredientPlaceholder = "2 eggs\n200g sugar"
 
     function changeHandler(e) {
         const { name, value } = e.target;
@@ -85,12 +83,9 @@ export default function RecipeCreate() {
                             onChange={changeHandler}
                         >
                             <option value="">Select a meal type</option>
-                            <option value="Appetizer">Appetizer</option>
-                            <option value="Main course">Main course</option>
-                            <option value="Dessert">Dessert</option>
-                            <option value="Side">Side</option>
-                            <option value="Breakfast">Breakfast</option>
-                            <option value="Snack">Snack</option>
+                            {mealTypes.map(type => (
+                                <option value={type}>{type}</option>
+                            ))}
                         </select>
                         {errors.mealType && <p className="text-red-500">{errors.mealType}</p>}
                     </div>
