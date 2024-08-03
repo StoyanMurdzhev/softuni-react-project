@@ -1,4 +1,21 @@
-import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, limit, startAfter, getDoc, doc, updateDoc, deleteDoc, increment, arrayUnion } from 'firebase/firestore';
+import { 
+    collection, 
+    getDocs, 
+    addDoc, 
+    serverTimestamp, 
+    query, 
+    orderBy, 
+    limit, 
+    startAfter, 
+    getDoc, 
+    doc, 
+    updateDoc, 
+    deleteDoc, 
+    increment, 
+    arrayUnion,
+    where
+} from 'firebase/firestore';
+
 import { db } from '../firebase/firebase.js';
 import validator from 'validator';
 
@@ -92,9 +109,9 @@ async function getLastThree() {
     try {
         const recipesRef = collection(db, "recipes");
 
-        const q = query(recipesRef, orderBy("createdOn", "desc"), limit(3));
+        const myQuery = query(recipesRef, orderBy("createdOn", "desc"), limit(3));
 
-        const querySnapshot = await getDocs(q);
+        const querySnapshot = await getDocs(myQuery);
 
         const recipes = querySnapshot.docs.map(
             doc => (
@@ -115,10 +132,9 @@ async function getLastThree() {
     }
 };
 
-async function getAllWithPagination(lastVisible, pageSize) {
+async function getWithPagination(lastVisible, pageSize) {
     try {
         const recipesRef = collection(db, "recipes");
-        console.log(lastVisible);
 
         let myQuery = query(recipesRef, orderBy("createdOn", "desc"), limit(pageSize));
         
@@ -176,6 +192,28 @@ async function likeRecipe(id, userId) {
     }
 }
 
+async function getRecipesByUser(userId) {
+    try {
+        const recipesRef = collection(db, "recipes");
+        const myQuery = query(recipesRef, where("ownerId", "==", userId));
+        const querySnapshot = await getDocs(myQuery);
+        
+        if (querySnapshot.docs.length == 0) {
+            throw new Error("You have not posted any recipes yet.");
+        }
+
+        const recipes = querySnapshot.docs.map(doc => ({
+            ...doc.data(),
+            id: doc.id
+        }));
+
+        return recipes;
+
+    } catch (err) {
+        throw err;
+    }
+}
+
 export {
     validateFormData,
     postRecipe,
@@ -183,7 +221,8 @@ export {
     deleteRecipe,
     getById,
     getLastThree,
-    getAllWithPagination,
+    getWithPagination,
+    getRecipesByUser,
     likeRecipe,
     convertTimestamp
 }
