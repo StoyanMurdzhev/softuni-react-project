@@ -20,9 +20,13 @@ export default function RecipeDetails() {
         (async () => {
             try {
                 const fetchedRecipe = await getById(id);
-                if (fetchedRecipe.likes.likedBy.includes(user.uid)) {
-                    setUserHasLiked(true);
-                };
+                if (user) {
+                    if (fetchedRecipe.likes.likedBy.includes(user.uid)) {
+                        setUserHasLiked(true);
+                    } else {
+                        setUserHasLiked(false);
+                    }
+                }
                 setRecipe(fetchedRecipe);
             } catch (err) {
                 setError(err.message);
@@ -118,8 +122,8 @@ export default function RecipeDetails() {
 
             </div>
 
+            
             <div className="mt-10 w-300 flex justify-center items-center">
-
                 {isOwner ?
                     (<>
                         <EditButton id={id} />
@@ -127,8 +131,8 @@ export default function RecipeDetails() {
                     </>)
                     :
                     <>
-                        <span className="mr-5">{recipe.likes.count} {recipe.likes.count == 1 ? "like" : "likes"}</span>
-                        {!userHasLiked && <LikeButton id={id} userId={user.uid} onLike={onLike} />}
+                        <span className="mr-5">This recipe has {recipe.likes.count} {recipe.likes.count == 1 ? "like" : "likes"}</span>
+                        {user && !userHasLiked && <LikeButton id={id} userId={user.uid} onLike={onLike} />}
                     </>
                 }
             </div>
