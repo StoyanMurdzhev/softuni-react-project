@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getAllWithPagination } from "../../services/recipeService";
+import { getWithPagination } from "../../services/recipeService";
 
 import RecipeCard from "../recipe-card/RecipeCard";
 
@@ -17,7 +17,7 @@ export default function RecipeList() {
 
         try {
 
-            const { recipes, lastVisibleRecipe, isLastBatch } = await getAllWithPagination(lastVisible, pageSize);
+            const { recipes, lastVisibleRecipe, isLastBatch } = await getWithPagination(lastVisible, pageSize);
             const nextRecipes = recipes.map(recipe => (
                 {
                     ...recipe.data(),
@@ -44,9 +44,8 @@ export default function RecipeList() {
         (async () => {
 
             try {
-                console.log("Invocation");
                 const pageSize = 7;
-                const { recipes } = await getAllWithPagination(null, pageSize);
+                const { recipes } = await getWithPagination(null, pageSize);
                 const initialRecipes = recipes.map(recipe => (
                     {
                         ...recipe.data(),
