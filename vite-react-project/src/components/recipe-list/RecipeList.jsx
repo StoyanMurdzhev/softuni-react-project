@@ -35,7 +35,7 @@ export default function RecipeList() {
                 setHasMoreRecipes(false);
             }
 
-            
+
 
         } catch (err) {
             console.error(err);
@@ -61,7 +61,7 @@ export default function RecipeList() {
 
             setRecipes(filteredRecipes);
             console.log(isLastBatch);
-            
+
             if (isLastBatch) {
                 setHasMoreRecipes(false);
             } else {
@@ -113,7 +113,10 @@ export default function RecipeList() {
                         Here you can browse all the recipes shared by our users!
                     </p>
                 </div>
-                <MealTypeButtons handleFilter={handleFilter} />
+
+                <div className="flex justify-center mt-8">
+                    <MealTypeButtons handleFilter={handleFilter} />
+                </div>
 
                 {error ?
                     (
