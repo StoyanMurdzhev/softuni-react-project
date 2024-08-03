@@ -132,8 +132,9 @@ async function getLastThree() {
     }
 };
 
-async function getWithPagination(lastVisible, pageSize) {
+async function getWithPagination(lastVisible, pageSize, typeFilter) {
     try {
+
         const recipesRef = collection(db, "recipes");
 
         let myQuery = query(recipesRef, orderBy("createdOn", "desc"), limit(pageSize));
@@ -142,21 +143,33 @@ async function getWithPagination(lastVisible, pageSize) {
             myQuery = query(recipesRef, orderBy("createdOn", "desc"), startAfter(lastVisible), limit(pageSize));
         }
 
+        if(typeFilter) {
+            myQuery = query(myQuery, where("mealType", "==", typeFilter));
+        }
+
         const querySnapshot = await getDocs(myQuery);
+
+        if (querySnapshot.docs.length == 0) {
+            throw new Error("No recipes of this type have been posted yet.");
+        }
+
         const recipes = querySnapshot.docs;
         const lastVisibleRecipe = querySnapshot.docs[querySnapshot.docs.length - 1];
 
-        const nextRecipeQuery = query(recipesRef, orderBy("createdOn", "desc"), startAfter(lastVisibleRecipe), limit(1));
+
+        let nextRecipeQuery = query(recipesRef, orderBy("createdOn", "desc"), startAfter(lastVisibleRecipe), limit(1));
+        if (typeFilter) {
+            nextRecipeQuery = query(nextRecipeQuery, where("mealType", "==", typeFilter));
+        }
         const nextRecipeSnapshot = await getDocs(nextRecipeQuery);
+        console.log(nextRecipeSnapshot.docs);
+        
         const isLastBatch = !!nextRecipeSnapshot.empty;
 
         return { recipes, lastVisibleRecipe, isLastBatch };
 
     } catch (error) {
-
-        console.log(error);
         throw error;
-
     }
 };
 
