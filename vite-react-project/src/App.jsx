@@ -12,6 +12,7 @@ import RecipeDetails from "./components/recipe-details/RecipeDetails";
 import RecipeCreate from "./components/recipe-create/RecipeCreate";
 import RecipeList from "./components/recipe-list/RecipeList";
 import RecipeEdit from "./components/recipe-edit/RecipeEdit";
+import MyRecipes from "./components/my-recipes/MyRecipes";
 import NotFound from "./components/not-found/NotFound";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                 <Route path="/recipes/:id/details" element={<RecipeDetails />} />
                 <Route element={<ProtectedRoutes />}>
                     <Route path="/create" element={<RecipeCreate />}/>
+                    <Route path="/my-recipes" element={<MyRecipes />}/>
                     <Route path="/recipes/:id/edit" element={<RecipeEdit />}/>
                 </Route>
 
