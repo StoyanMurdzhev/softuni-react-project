@@ -3,19 +3,21 @@ import { getWithPagination } from "../../services/recipeService";
 
 import RecipeCard from "../recipe-card/RecipeCard";
 import MealTypeButtons from "../buttons/MealTypeButtons";
+import LoadingSpinner from "../spinner/LoadingSpinner";
 
 export default function RecipeList() {
 
     const [recipes, setRecipes] = useState([]);
     const [lastVisible, setLastVisible] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoadingInitial, setIsLoadingInitial] = useState(true);
+    const [isLoadingNext, setIsLoadingNext] = useState(false);
     const [hasMoreRecipes, setHasMoreRecipes] = useState(true);
     const [mealTypeFilter, setMealTypeFilter] = useState("");
     const [error, setError] = useState(null);
 
     async function getMore(mealTypeFilter) {
         const pageSize = 6;
-        setIsLoading(true);
+        setIsLoadingNext(true);
         setError(null);
         try {
 
@@ -40,14 +42,14 @@ export default function RecipeList() {
         } catch (err) {
             console.error(err);
         } finally {
-            setIsLoading(false);
+            setIsLoadingNext(false);
         }
 
     }
 
     async function handleFilter(type) {
         setError(null);
-        setIsLoading(true);
+        setIsLoadingInitial(true);
         try {
             setMealTypeFilter(type);
             const { recipes, lastVisibleRecipe, isLastBatch } = await getWithPagination(null, 6, type);
@@ -72,7 +74,7 @@ export default function RecipeList() {
         } catch (err) {
             setError(err);
         } finally {
-            setIsLoading(false);
+            setIsLoadingInitial(false);
         }
     }
 
@@ -96,7 +98,9 @@ export default function RecipeList() {
                 }
 
             } catch (err) {
-                console.error(err);
+                setError(err);
+            } finally {
+                setIsLoadingInitial(false);
             }
 
         })();
@@ -123,20 +127,25 @@ export default function RecipeList() {
                         <p className="max-w-lg mx-auto mt-14 text-gray-500 text-center text-2xl">
                             {error.message}
                         </p>)
-                    : (
-                        <>
-                            <div className="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2 xl:grid-cols-3">
-                                {recipes.map(recipe => (
-                                    <RecipeCard key={recipe.id} recipe={recipe} />
-                                ))}
-                            </div>
-                            <div className="flex justify-center mt-8">
-                                {isLoading
-                                    ? <p>Loading...</p>
-                                    : hasMoreRecipes && <button onClick={() => getMore(mealTypeFilter)} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Load more recipes</button>}
-                            </div>
-                        </>
-                    )}
+                    : isLoadingInitial ?
+                        <LoadingSpinner />
+                        : (
+                            <>
+                                <div className="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2 xl:grid-cols-3">
+                                    {recipes.map(recipe => (
+                                        <RecipeCard key={recipe.id} recipe={recipe} />
+                                    ))}
+                                </div>
+                                <div className="flex justify-center mt-8">
+                                    {isLoadingNext
+                                        ?
+                                        (<LoadingSpinner />)
+                                        :
+                                        (hasMoreRecipes && <button onClick={() => getMore(mealTypeFilter)} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Load more recipes</button>)
+                                    }
+                                </div>
+                            </>
+                        )}
 
             </div>
         </section>
