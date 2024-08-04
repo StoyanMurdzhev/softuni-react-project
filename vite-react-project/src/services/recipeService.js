@@ -208,7 +208,7 @@ async function likeRecipe(id, userId) {
 async function getRecipesByUser(userId) {
     try {
         const recipesRef = collection(db, "recipes");
-        const myQuery = query(recipesRef, where("ownerId", "==", userId));
+        const myQuery = query(recipesRef, where("ownerId", "==", userId), orderBy("createdOn", "desc"));
         const querySnapshot = await getDocs(myQuery);
         
         if (querySnapshot.docs.length == 0) {
