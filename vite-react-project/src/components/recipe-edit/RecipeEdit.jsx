@@ -2,14 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/useAuth.js';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getById, editRecipe, validateFormData } from '../../services/recipeService';
+import { ingredientPlaceholder } from '../../constants.js';
+import LoadingSpinner from '../spinner/LoadingSpinner.jsx';
 
 
 
 export default function RecipeEdit() {
     const { id } = useParams();
     const { user } = useAuth();
+    const navigate = useNavigate();
     
-    
+    const [isLoading, setIsLoading] = useState(true);
+    const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
         name: "",
         description: "",
@@ -20,9 +24,7 @@ export default function RecipeEdit() {
         tags: ""
     });
     
-    const [errors, setErrors] = useState({});
     
-    const navigate = useNavigate();
     
     useEffect(() => {
         (async () => {
@@ -30,18 +32,21 @@ export default function RecipeEdit() {
                 const fetchedRecipe = await getById(id);
                 if (user.uid !== fetchedRecipe.ownerId) {
                     navigate("/recipes");
+                } else {
+                    setFormData({ 
+                        ...fetchedRecipe,
+                        ingredients: fetchedRecipe.ingredients.join("\n"),
+                        instructions: fetchedRecipe.instructions.join("\n"),
+                        tags: fetchedRecipe.tags.join(", ")
+                    });
                 }
-                setFormData({ 
-                    ...fetchedRecipe,
-                    ingredients: fetchedRecipe.ingredients.join("\n"),
-                    instructions: fetchedRecipe.instructions.join("\n"),
-                    tags: fetchedRecipe.tags.join(", ")
-                });
             } catch (err) {
                 setErrors(prevErrors => ({
                     ...prevErrors,
                     msg: err.message
                 }))
+            } finally {
+                setIsLoading(false);
             }
         })();
     }, [id]);   
@@ -76,8 +81,10 @@ export default function RecipeEdit() {
         }
         
     };
-    
-    const ingredientPlaceholder = "2 eggs\n200g sugar";
+
+    if (isLoading) {
+        return <LoadingSpinner />
+    }
 
     return (
         <section className="bg-white dark:bg-gray-900">
