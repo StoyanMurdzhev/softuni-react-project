@@ -14,6 +14,10 @@ export default function Login() {
     async function submitHandler(e) {
         e.preventDefault();
         setError("");
+        if (!email || !password) {
+            setError("Please make sure all fields are filled in.");
+            return;
+        }
 
         try {
             await login(email, password);
