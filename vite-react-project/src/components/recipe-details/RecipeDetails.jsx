@@ -82,9 +82,11 @@ export default function RecipeDetails() {
                                 className="object-cover w-full h-64 bg-center rounded-lg"
                                 alt="Pizza Margherita"
                             />
-                            <p className="mt-6 mb-2 text-xs font-semibold tracking-wider uppercase text-primary">
-                                {recipe.mealType}
-                            </p>
+                            <Link to={`/recipes?type=${recipe.mealType}`}>
+                                <p className="mt-6 mb-2 text-xs font-semibold tracking-wider uppercase text-primary hover:underline hover:text-gray-500">
+                                    {recipe.mealType}
+                                </p>
+                            </Link>
                             <h1
                                 className="mb-3 text-3xl font-bold leading-tight text-gray-900 md:text-4xl"
                                 itemProp="headline"
@@ -92,7 +94,7 @@ export default function RecipeDetails() {
                             >
                                 {recipe.name}
                             </h1>
-                            
+
                             <div className="flex items-center text-gray-700">
                                 <p className="text-sm text-gray-500">{recipe.editedOn ? "Last updated:" : "Date published:"} {recipeTimestamp}</p>
                             </div>
