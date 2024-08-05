@@ -90,11 +90,11 @@ export default function RecipeEdit() {
             <div className="container flex items-center justify-center min-h-screen px-6 pb-16 mx-auto">
                 <form className="w-full max-w-md" onSubmit={submitHandler}>
 
-                    <div className="flex items-center justify-center">
+                    <div className="flex items-center justify-center mt-2 text-xl dark:text-gray-300 ">
                         <p>Edit your recipe:</p>
                     </div>
                     <div className="mt-8">
-                        <label htmlFor="name">What is your dish called?</label>
+                        <label htmlFor="name" className="dark:text-gray-300">What is your dish called?</label>
                         <input
                             type="text"
                             className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
@@ -107,7 +107,7 @@ export default function RecipeEdit() {
                     </div>
 
                     <div className="mt-4">
-                        <label htmlFor="mealType">What type of meal is it?</label>
+                        <label htmlFor="mealType" className="dark:text-gray-300">What type of meal is it?</label>
                         <select
                             className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             id="mealType"
@@ -128,7 +128,7 @@ export default function RecipeEdit() {
 
 
                     <div className="mt-6">
-                        <label htmlFor="description">Give a short description of the dish:</label>
+                        <label htmlFor="description" className="dark:text-gray-300">Give a short description of the dish:</label>
                         <textarea
                             type="text"
                             className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
@@ -141,7 +141,7 @@ export default function RecipeEdit() {
                         {errors.description && <p className="text-red-500">{errors.description}</p>}
                     </div>
                     <div className="mt-4">
-                        <label htmlFor="ingredients">What are the ingredients? Please enter each ingredient on a new line:</label>
+                        <label htmlFor="ingredients" className="dark:text-gray-300">What are the ingredients? Please enter each ingredient on a new line:</label>
                         <textarea
                             type="text"
                             className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 whitespace-pre-wrap overflow-auto"
@@ -155,7 +155,7 @@ export default function RecipeEdit() {
                     </div>
 
                     <div className="mt-4">
-                        <label htmlFor="instructions">How is the dish prepared?</label>
+                        <label htmlFor="instructions" className="dark:text-gray-300">How is the dish prepared?</label>
                         <textarea
                             type="text"
                             className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 whitespace-pre-wrap"
@@ -168,7 +168,7 @@ export default function RecipeEdit() {
                     </div>
 
                     <div className="mt-2">
-                        <label htmlFor="imageUrl">Add a link to an image of your dish:</label>
+                        <label htmlFor="imageUrl" className="dark:text-gray-300">Add a link to an image of your dish:</label>
                         <input
                             type="text"
                             className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
