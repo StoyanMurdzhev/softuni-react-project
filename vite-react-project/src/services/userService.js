@@ -27,17 +27,25 @@ async function logout() {
 
 async function register(email, password, repass) {
     const errors = {};
+    if (!email || !password || !repass) {
+        errors.missingFields = "Please make sure all fields are filled in.";
+        throw errors;
+    }
 
-    if (password.length < 6) {
-        errors.password = "Password should be at least six characters long."
+    if (password && password.length < 6) {
+        errors.password = "Password should be at least six characters long.";
     }
     
     if (password !== repass) {
             errors.repass = "Passwords do not match.";
         }
     
+    if (Object.keys(errors).length != 0) {
+        throw errors;
+    }
+
     try {
-        await createUserWithEmailAndPassword(auth, email, password)
+        await createUserWithEmailAndPassword(auth, email, password);
     } catch (error) {
 
         if (error.code === "auth/invalid-email") {
