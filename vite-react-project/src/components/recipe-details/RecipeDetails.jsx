@@ -83,12 +83,12 @@ export default function RecipeDetails() {
                                 alt="Pizza Margherita"
                             />
                             <Link to={`/recipes?type=${recipe.mealType}`}>
-                                <p className="mt-6 mb-2 text-xs font-semibold tracking-wider uppercase text-primary hover:underline hover:text-gray-500">
+                                <p className="mt-6 mb-2 text-xs font-semibold tracking-wider uppercase text-primary hover:underline hover:text-gray-500 dark:text-gray-300">
                                     {recipe.mealType}
                                 </p>
                             </Link>
                             <h1
-                                className="mb-3 text-3xl font-bold leading-tight text-gray-900 md:text-4xl"
+                                className="mb-3 text-3xl font-bold leading-tight text-gray-900 md:text-4xl dark:text-gray-300"
                                 itemProp="headline"
                                 title={recipe.name}
                             >
@@ -103,22 +103,22 @@ export default function RecipeDetails() {
                         <div className="w-full mx-auto prose md:w-3/4 lg:w-1/2">
 
                             <section>
-                                <h2 className="font-bold text-2xl">Description</h2>
-                                <p className="mt-3 text-lg">{recipe.description}</p>
+                                <h2 className="font-bold text-2xl dark:text-gray-300">Description</h2>
+                                <p className="mt-3 text-lg dark:text-gray-300">{recipe.description}</p>
                             </section>
 
                             <section>
-                                <h2 className="mt-10 font-bold text-2xl">Ingredients</h2>
-                                <ul className="list-disc mt-3 pl-5">
+                                <h2 className="mt-10 font-bold text-2xl dark:text-gray-300">Ingredients</h2>
+                                <ul className="list-disc mt-3 pl-5 dark:text-gray-300">
                                     {recipe.ingredients.map(ingredient => (
-                                        <li key={ingredient} className="text-lg">{ingredient}</li>
+                                        <li key={ingredient} className="text-lg dark:text-gray-300">{ingredient}</li>
                                     ))}
                                 </ul>
                             </section>
 
                             <section>
-                                <h2 className="mt-10 font-bold text-2xl">Instructions:</h2>
-                                <p className="mt-3 text-lg whitespace-pre-wrap">{recipe.instructions.join("\n\n")}</p>
+                                <h2 className="mt-10 font-bold text-2xl dark:text-gray-300">Instructions:</h2>
+                                <p className="mt-3 text-lg whitespace-pre-wrap dark:text-gray-300">{recipe.instructions.join("\n\n")}</p>
                             </section>
 
                         </div>
