@@ -18,7 +18,7 @@ import NotFound from "./components/not-found/NotFound";
 function App() {
 
     return (
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen dark:bg-gray-900">
             <Navbar />
             
             <Routes>
