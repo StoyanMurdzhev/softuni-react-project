@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { getWithPagination } from "../../services/recipeService";
+import { useSearchParams } from "react-router-dom";
 
 import RecipeCard from "../recipe-card/RecipeCard";
 import MealTypeButtons from "../buttons/MealTypeButtons";
 import LoadingSpinner from "../spinner/LoadingSpinner";
 
 export default function RecipeList() {
+    let [searchParams, setSearchParams] = useSearchParams();
+    const mealType = searchParams.get("type");
 
     const [recipes, setRecipes] = useState([]);
     const [lastVisible, setLastVisible] = useState(null);
@@ -14,88 +17,71 @@ export default function RecipeList() {
     const [hasMoreRecipes, setHasMoreRecipes] = useState(true);
     const [mealTypeFilter, setMealTypeFilter] = useState("");
     const [error, setError] = useState(null);
+    const pageSize = 6;
 
     async function getMore(mealTypeFilter) {
-        const pageSize = 6;
         setIsLoadingNext(true);
         setError(null);
         try {
 
             const { recipes, lastVisibleRecipe, isLastBatch } = await getWithPagination(lastVisible, pageSize, mealTypeFilter);
             const nextRecipes = recipes.map(recipe => (
-                {
-                    ...recipe.data(),
-                    id: recipe.id
-                }
-            )
-            )
+                    {
+                        ...recipe.data(),
+                        id: recipe.id
+                    }
+                )
+            );
+
             setRecipes(previousRecipes => [...previousRecipes, ...nextRecipes]);
 
             setLastVisible(lastVisibleRecipe);
 
-            if (isLastBatch) {
-                setHasMoreRecipes(false);
-            }
+            setHasMoreRecipes(!isLastBatch);
 
 
 
         } catch (err) {
             console.error(err);
+            setError(err);
         } finally {
             setIsLoadingNext(false);
         }
 
     }
 
-    async function handleFilter(type) {
-        setError(null);
-        setIsLoadingInitial(true);
-        try {
-            setMealTypeFilter(type);
-            const { recipes, lastVisibleRecipe, isLastBatch } = await getWithPagination(null, 6, type);
-            const filteredRecipes = recipes.map(recipe => (
-                {
-                    ...recipe.data(),
-                    id: recipe.id
-                }
-            )
-            )
-
-            setRecipes(filteredRecipes);
-            console.log(isLastBatch);
-
-            if (isLastBatch) {
-                setHasMoreRecipes(false);
-            } else {
-                setLastVisible(lastVisibleRecipe);
-                setHasMoreRecipes(true);
-            }
-
-        } catch (err) {
-            setError(err);
-        } finally {
-            setIsLoadingInitial(false);
+    async function handleFilter(mealType) {
+        if (mealType) {
+            setSearchParams({ type: mealType });
+        } else {
+            setSearchParams({});
         }
+        
+            setMealTypeFilter(mealType);
+            setRecipes([]);
+            setLastVisible(null);
+            setHasMoreRecipes(true);
+        
     }
 
     useEffect(() => {
         (async () => {
+            setIsLoadingInitial(true);
+            setError(null);
+
 
             try {
-                const pageSize = 7;
-                const { recipes } = await getWithPagination(null, pageSize, null);
+                const { recipes, lastVisibleRecipe, isLastBatch } = await getWithPagination(null, pageSize, mealTypeFilter);
                 const initialRecipes = recipes.map(recipe => (
                     {
                         ...recipe.data(),
                         id: recipe.id
                     }
                 ));
-                setRecipes(initialRecipes.slice(0, 6));
-                setLastVisible(recipes[5]);
 
-                if (initialRecipes.length < pageSize) {
-                    setHasMoreRecipes(false);
-                }
+                setRecipes(initialRecipes);
+                setLastVisible(lastVisibleRecipe);
+                setHasMoreRecipes(!isLastBatch);
 
             } catch (err) {
                 setError(err);
@@ -104,7 +90,7 @@ export default function RecipeList() {
             }
 
         })();
-    }, []);
+    }, [mealTypeFilter]);
 
     return (
         <section className="bg-white dark:bg-gray-900">
