@@ -52,7 +52,6 @@ async function postRecipe(formData, userId) {
             ownerId: userId,
             instructions: formData.instructions.split("\n").map(instruction => instruction.trim()),
             ingredients: formData.ingredients.split("\n").map(ingredient => ingredient.trim()),
-            tags: formData.tags.split(",").map(tag => tag.trim()),
             createdOn: serverTimestamp(),
             likes: {
                 count: 0,
@@ -72,7 +71,6 @@ async function editRecipe(formData, id) {
             ...formData,
             instructions: formData.instructions.split("\n").map(instruction => instruction.trim()),
             ingredients: formData.ingredients.split("\n").map(ingredient => ingredient.trim()),
-            tags: formData.tags.split(",").map(tag => tag.trim()),
             editedOn: serverTimestamp()
         });
         return { success: true };

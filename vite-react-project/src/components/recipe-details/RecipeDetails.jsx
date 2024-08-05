@@ -92,17 +92,7 @@ export default function RecipeDetails() {
                             >
                                 {recipe.name}
                             </h1>
-                            <div className="flex mb-4 space-x-2">
-                                {recipe.tags.map(tag =>
-                                (
-                                    <Link to="/"
-                                        className="text-gray-900 bg-gray-100 badge hover:bg-gray-200"
-                                        key={tag}>
-                                        {tag}
-                                    </Link>
-                                )
-                                )}
-                            </div>
+                            
                             <div className="flex items-center text-gray-700">
                                 <p className="text-sm text-gray-500">{recipe.editedOn ? "Last updated:" : "Date published:"} {recipeTimestamp}</p>
                             </div>
