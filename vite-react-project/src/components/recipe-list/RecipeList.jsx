@@ -8,23 +8,22 @@ import LoadingSpinner from "../spinner/LoadingSpinner";
 
 export default function RecipeList() {
     let [searchParams, setSearchParams] = useSearchParams();
-    const mealType = searchParams.get("type");
+    const mealTypeParam = searchParams.get("type");
 
     const [recipes, setRecipes] = useState([]);
     const [lastVisible, setLastVisible] = useState(null);
     const [isLoadingInitial, setIsLoadingInitial] = useState(true);
     const [isLoadingNext, setIsLoadingNext] = useState(false);
     const [hasMoreRecipes, setHasMoreRecipes] = useState(true);
-    const [mealTypeFilter, setMealTypeFilter] = useState("");
     const [error, setError] = useState(null);
     const pageSize = 6;
 
-    async function getMore(mealTypeFilter) {
+    async function getMore(mealTypeParam) {
         setIsLoadingNext(true);
         setError(null);
         try {
 
-            const { recipes, lastVisibleRecipe, isLastBatch } = await getWithPagination(lastVisible, pageSize, mealTypeFilter);
+            const { recipes, lastVisibleRecipe, isLastBatch } = await getWithPagination(lastVisible, pageSize, mealTypeParam);
             const nextRecipes = recipes.map(recipe => (
                     {
                         ...recipe.data(),
@@ -55,22 +54,19 @@ export default function RecipeList() {
         } else {
             setSearchParams({});
         }
-
-            setMealTypeFilter(mealType);
             setRecipes([]);
             setLastVisible(null);
             setHasMoreRecipes(true);
-        
     }
 
     useEffect(() => {
         (async () => {
             setIsLoadingInitial(true);
             setError(null);
-
+            
 
             try {
-                const { recipes, lastVisibleRecipe, isLastBatch } = await getWithPagination(null, pageSize, mealTypeFilter);
+                const { recipes, lastVisibleRecipe, isLastBatch } = await getWithPagination(null, pageSize, mealTypeParam);
                 const initialRecipes = recipes.map(recipe => (
                     {
                         ...recipe.data(),
@@ -89,7 +85,7 @@ export default function RecipeList() {
             }
 
         })();
-    }, [mealTypeFilter]);
+    }, [mealTypeParam]);
 
     return (
         <section className="bg-white dark:bg-gray-900">
@@ -126,7 +122,7 @@ export default function RecipeList() {
                                         ?
                                         (<LoadingSpinner />)
                                         :
-                                        (hasMoreRecipes && <button onClick={() => getMore(mealTypeFilter)} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Load more recipes</button>)
+                                        (hasMoreRecipes && <button onClick={() => getMore(mealTypeParam)} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Load more recipes</button>)
                                     }
                                 </div>
                             </>
