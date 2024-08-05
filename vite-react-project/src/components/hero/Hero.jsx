@@ -37,15 +37,9 @@ export default function Hero() {
                     </div>
                 </div>
             </div>
-            <div className="w-full h-64 lg:w-1/2 lg:h-auto">
-                <div
-                    className="w-full h-full bg-cover"
-                    style={{
-                        backgroundImage:
-                            "url(https://firebasestorage.googleapis.com/v0/b/softuni-react-spa-project.appspot.com/o/Kitchen_and_ingredient_digital_drawing_doodle.jpg?alt=media&token=96630ef6-db18-4513-a722-0abda9b57b54)"
-                    }}
-                >
-                </div>
+
+            <div className="flex items-center justify-center w-full px-6 py-8 lg:h-[32rem] lg:w-1/2">
+                <img src="https://firebasestorage.googleapis.com/v0/b/softuni-react-spa-project.appspot.com/o/Kitchen_and_ingredient_digital_drawing_doodle.jpg?alt=media&token=96630ef6-db18-4513-a722-0abda9b57b54" alt="hero-image" className="object-contain h-full w-full"/>
             </div>
         </div>
     )
