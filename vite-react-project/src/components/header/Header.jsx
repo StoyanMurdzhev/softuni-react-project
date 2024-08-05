@@ -15,8 +15,7 @@ export default function Navbar() {
             await logout();
             navigate("/login");
         } catch (error) {
-            console.log(error);
-            // to do: implement better error handling
+            alert(`Error logging out: ${err.message}`);
         }
     }
     return (
