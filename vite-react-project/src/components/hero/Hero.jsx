@@ -12,7 +12,7 @@ export default function Hero() {
                         TheCookBook
                     </h2>
                     <p className="mt-4 text-sm text-gray-500 dark:text-gray-400 lg:text-base">
-                        Discover and share deliciours recipes!
+                        Discover and share delicious recipes!
                     </p>
                     <div className="flex flex-col mt-6 space-y-3 lg:space-y-0 lg:flex-row">
                         <Link to="/recipes"
