@@ -5,7 +5,7 @@ export default function Hero() {
     const { user } = useAuth();
 
     return (
-        <div className="lg:flex">
+        <div className="lg:flex dark:bg-gray-900">
             <div className="flex items-center justify-center w-full px-6 py-8 lg:h-[32rem] lg:w-1/2">
                 <div className="max-w-xl">
                     <h2 className="text-3xl font-semibold text-gray-800 dark:text-white lg:text-4xl">
