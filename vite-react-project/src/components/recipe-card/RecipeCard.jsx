@@ -24,11 +24,11 @@ export default function RecipeCard({ recipe }) {
                 </p>
                 <div className="flex items-center justify-between mt-4">
                     <div>
-                        <Link to="/"
-                            className="text-lg font-medium text-gray-700 dark:text-gray-300 hover:underline hover:text-gray-500"
+                        <p
+                            className="text-lg font-medium text-gray-700 dark:text-gray-300"
                         >
                            {recipe.editedOn ? "Last updated:" : "Date published:"}
-                        </Link>
+                        </p>
                         <p className="text-sm text-gray-500 dark:text-gray-400">
                             {recipeTimestamp}
                         </p>
