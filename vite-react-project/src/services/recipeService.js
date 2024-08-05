@@ -123,10 +123,7 @@ async function getLastThree() {
         return recipes;
 
     } catch (error) {
-
-        console.log(error);
         throw error;
-
     }
 };
 
@@ -160,7 +157,6 @@ async function getWithPagination(lastVisible, pageSize, typeFilter) {
             nextRecipeQuery = query(nextRecipeQuery, where("mealType", "==", typeFilter));
         }
         const nextRecipeSnapshot = await getDocs(nextRecipeQuery);
-        console.log(nextRecipeSnapshot.docs);
         
         const isLastBatch = !!nextRecipeSnapshot.empty;
 

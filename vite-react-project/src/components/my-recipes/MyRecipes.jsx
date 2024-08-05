@@ -31,7 +31,6 @@ export default function MyRecipes() {
 
     if (recipes.length === 2) {
         additionalClassNames += " grid-cols-2";
-        console.log(additionalClassNames);
     }
 
     return (

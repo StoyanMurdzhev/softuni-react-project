@@ -42,7 +42,6 @@ export default function RecipeList() {
 
 
         } catch (err) {
-            console.error(err);
             setError(err);
         } finally {
             setIsLoadingNext(false);
@@ -56,7 +55,7 @@ export default function RecipeList() {
         } else {
             setSearchParams({});
         }
-        
+
             setMealTypeFilter(mealType);
             setRecipes([]);
             setLastVisible(null);
