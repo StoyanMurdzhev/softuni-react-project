@@ -56,7 +56,7 @@ export default function RecipeCreate() {
             <div className="container flex items-center justify-center min-h-screen px-6 pb-16 mx-auto">
                 <form className="w-full max-w-md" onSubmit={submitHandler}>
 
-                    <div className="flex items-center justify-center">
+                    <div className="flex items-center justify-center text-2xl">
                         <p>Post a recipe:</p>
                     </div>
                     <div className="mt-8">
