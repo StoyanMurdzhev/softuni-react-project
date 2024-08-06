@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getById, editRecipe, validateFormData } from '../../services/recipeService';
 import { ingredientPlaceholder } from '../../constants.js';
 import LoadingSpinner from '../spinner/LoadingSpinner.jsx';
-
+import { mealTypes } from '../../constants.js';
 
 
 export default function RecipeEdit() {
@@ -116,19 +116,16 @@ export default function RecipeEdit() {
                             onChange={changeHandler}
                         >
                             <option value="">Select a meal type</option>
-                            <option value="Appetizer">Appetizer</option>
-                            <option value="Main course">Main course</option>
-                            <option value="Dessert">Dessert</option>
-                            <option value="Side">Side</option>
-                            <option value="Breakfast">Breakfast</option>
-                            <option value="Snack">Snack</option>
+                            {mealTypes.map(type => (
+                                <option className="capitalize" value={type} key={type}>{type}</option>
+                            ))}
                         </select>
                         {errors.mealType && <p className="text-red-500">{errors.mealType}</p>}
                     </div>
 
 
                     <div className="mt-6">
-                        <label htmlFor="description">Give a short description of the dish:</label>
+                        <label htmlFor="description">Give a short description of the dish/recipe:</label>
                         <textarea
                             type="text"
                             className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
@@ -155,7 +152,7 @@ export default function RecipeEdit() {
                     </div>
 
                     <div className="mt-4">
-                        <label htmlFor="instructions">How is the dish prepared?</label>
+                        <label htmlFor="instructions">How is the dish prepared? Please enter each instruction on a new line:</label>
                         <textarea
                             type="text"
                             className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 whitespace-pre-wrap"
