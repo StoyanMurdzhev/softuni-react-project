@@ -121,8 +121,8 @@ export default function RecipeDetails() {
                                 <p className="mt-3 text-lg whitespace-pre-wrap">{recipe.instructions.join("\n\n")}</p>
                             </section>
 
+                            <p className="mr-5 mt-6 text-blue-700 text-center">This recipe has {recipe.likes.count} {recipe.likes.count == 1 ? "like" : "likes"}</p>
                         </div>
-
                         <div className="mt-10 w-300 flex justify-center items-center">
                             {isOwner ?
                                 (<>
@@ -131,7 +131,6 @@ export default function RecipeDetails() {
                                 </>)
                                 :
                                 <>
-                                    <span className="mr-5 text-blue-700">This recipe has {recipe.likes.count} {recipe.likes.count == 1 ? "like" : "likes"}</span>
                                     {user && !userHasLiked && <LikeButton id={id} userId={user.uid} onLike={onLike} />}
                                 </>
                             }
