@@ -15,7 +15,7 @@ export default function DeleteButton({ id }) {
     async function deleteHandler(id) {
         try {
             await deleteRecipe(id);
-            navigate("/recipes");
+            navigate("/my-recipes");
         } catch (error) {
             alert(`Error deleting recipe: ${err.message}`);
         }
