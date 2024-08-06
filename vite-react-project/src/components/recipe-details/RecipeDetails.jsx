@@ -131,7 +131,7 @@ export default function RecipeDetails() {
                                 </>)
                                 :
                                 <>
-                                    <span className="mr-5">This recipe has {recipe.likes.count} {recipe.likes.count == 1 ? "like" : "likes"}</span>
+                                    <span className="mr-5 text-blue-700">This recipe has {recipe.likes.count} {recipe.likes.count == 1 ? "like" : "likes"}</span>
                                     {user && !userHasLiked && <LikeButton id={id} userId={user.uid} onLike={onLike} />}
                                 </>
                             }
