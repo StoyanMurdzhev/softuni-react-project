@@ -3,7 +3,7 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore"
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  apiKey: "AIzaSyBACiL7cQkTJZftK2S-wAPpYAomQ4LZ5CI",
   authDomain: "softuni-react-spa-project.firebaseapp.com",
   projectId: "softuni-react-spa-project",
   storageBucket: "softuni-react-spa-project.appspot.com",
