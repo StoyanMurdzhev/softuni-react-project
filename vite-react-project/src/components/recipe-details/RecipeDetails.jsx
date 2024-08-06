@@ -83,7 +83,7 @@ export default function RecipeDetails() {
                                 alt="Pizza Margherita"
                             />
                             <Link to={`/recipes?type=${recipe.mealType}`}>
-                                <p className="mt-6 mb-2 text-xs font-semibold tracking-wider uppercase text-primary hover:underline hover:text-gray-500">
+                                <p className="mt-6 mb-2 text-xs font-semibold tracking-wider uppercase text-primary text-blue-500 hover:underline hover:text-gray-500">
                                     {recipe.mealType}
                                 </p>
                             </Link>
