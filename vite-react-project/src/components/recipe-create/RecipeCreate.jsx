@@ -83,7 +83,7 @@ export default function RecipeCreate() {
                         >
                             <option value="">Select a meal type</option>
                             {mealTypes.map(type => (
-                                <option value={type} key={type}>{type}</option>
+                                <option className="capitalize" value={type} key={type}>{type}</option>
                             ))}
                         </select>
                         {errors.mealType && <p className="text-red-500">{errors.mealType}</p>}
@@ -91,7 +91,7 @@ export default function RecipeCreate() {
 
 
                     <div className="mt-6">
-                        <label htmlFor="description">Give a short description of the dish:</label>
+                        <label htmlFor="description">Give a short description of the dish/recipe:</label>
                         <textarea
                             type="text"
                             className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
@@ -118,7 +118,7 @@ export default function RecipeCreate() {
                     </div>
 
                     <div className="mt-4">
-                        <label htmlFor="instructions">How is the dish prepared?</label>
+                        <label htmlFor="instructions">How is the dish prepared? Please enter each instruction on a new line.</label>
                         <textarea
                             type="text"
                             className="block w-full p-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 whitespace-pre-wrap"
