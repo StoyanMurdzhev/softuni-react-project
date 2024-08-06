@@ -3,7 +3,7 @@ import { getLastThree } from "../../services/recipeService";
 
 import RecipeCard from "../recipe-card/RecipeCard";
 
-export default function RecentPosts() {
+export default function RecentRecipes() {
 
     const [recipes, setRecipes] = useState([]);
 
@@ -16,7 +16,7 @@ export default function RecentPosts() {
     }, []);
     
     return (
-        <section className="bg-white dark:bg-gray-900 mx-20 my-10">
+        <section className="bg-white dark:bg-gray-900 mx-20 mt-14 mb-10">
             <div className="container px-6 py-10 mx-auto">
                 <div className="flex items-center justify-between">
                     <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white"> Recent Recipes </h1>

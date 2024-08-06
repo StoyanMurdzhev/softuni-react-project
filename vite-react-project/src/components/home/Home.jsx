@@ -1,5 +1,5 @@
 import Hero from "../hero/Hero";
-import RecentPosts from "../recent/RecentPosts";
+import RecentRecipes from "../recent-recipes/RecentRecipes";
 import ScrollArrow from "../scroll-arrow/ScrollArrow";
 
 export default function Home() {
@@ -7,7 +7,7 @@ export default function Home() {
         <>
         <Hero />
         <ScrollArrow />
-        <RecentPosts />
+        <RecentRecipes />
         </>
     );
 }
