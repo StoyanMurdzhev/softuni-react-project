@@ -38,7 +38,7 @@ function validateFormData(formData) {
         errors.instructions = "Instructions must be at least ten characters long."
     }
 
-    if (!validator.isURL(formData.imageUrl, { protocols: ['http', 'https'], require_protocol: true })) {
+    if (formData.imageUrl && !validator.isURL(formData.imageUrl, { protocols: ['http', 'https'], require_protocol: true })) {
         errors.imageUrl = "Please enter a valid URL";
     }
 
