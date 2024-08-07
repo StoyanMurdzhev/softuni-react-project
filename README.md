@@ -1,5 +1,6 @@
 # softuni-react-project
 This is a single-page application made for SoftUni's React JS Course, part of the JS Web module.
+You can see a live version of the site [here](https://softuni-react-spa-project.web.app/).
 
 ![home-page](https://github.com/user-attachments/assets/06a59f6a-ff86-4bd1-b2ed-0e3daf88da94)
 ![recent-recipes](https://github.com/user-attachments/assets/69d301f0-ed87-4e97-bd9a-9dbbfe45d7e6)
