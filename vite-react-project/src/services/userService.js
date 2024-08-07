@@ -1,4 +1,4 @@
-import { auth } from "../firebase/firebase.js";
+import { auth } from "../firebase.js";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 async function login(email, password) {

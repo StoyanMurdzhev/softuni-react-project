@@ -16,7 +16,7 @@ import {
     where
 } from 'firebase/firestore';
 
-import { db } from '../firebase/firebase.js';
+import { db } from '../firebase.js';
 import validator from 'validator';
 
 function validateFormData(formData) {
